@@ -32,7 +32,7 @@ describe("<Link />", () => {
 
   it("Link의 to는 name의 lowerCase가 된다", () => {
     const { link } = setup({ name: "Project" });
-    expect(link.props().to).toBe("project");
+    expect(link.props().to).toBe("/project");
   });
 
   it("Link를 클릭할 경우, 해당 페이지로 이동한다", () => {

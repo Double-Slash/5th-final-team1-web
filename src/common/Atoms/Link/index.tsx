@@ -8,7 +8,7 @@ export interface LinkProps {
 const Link = ({ name }: LinkProps) => {
   return (
     <>
-      <S.Link to={name.toLocaleLowerCase()}>{name}</S.Link>
+      <S.Link to={`/${name.toLocaleLowerCase()}`}>{name}</S.Link>
     </>
   );
 };
