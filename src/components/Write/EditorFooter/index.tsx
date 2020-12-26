@@ -14,9 +14,15 @@ const EditorFooter = () => {
 
   return (
     <>
-      <Button text="뒤로가기" onClick={onClickGoBack} />
-      <Button text="미리보기" onClick={onClickPreview} />
-      <Button text="제출하기" onClick={onClickSubmit} />
+      <Button isLinked={false} onClick={onClickGoBack}>
+        뒤로가기
+      </Button>
+      <Button isLinked={false} onClick={onClickPreview}>
+        미리보기
+      </Button>
+      <Button isLinked={false} onClick={onClickSubmit}>
+        제출하기
+      </Button>
     </>
   );
 };
