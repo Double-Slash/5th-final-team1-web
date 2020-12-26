@@ -21,7 +21,7 @@ const TitleInput = () => {
 
   return (
     <>
-      <S.Textarea ref={textareaRef} value={text} onChange={changeTextarea} />
+      <S.Textarea ref={textareaRef} value={text} onChange={changeTextarea} placeholder="제목을 입력하세요" />
     </>
   );
 };
