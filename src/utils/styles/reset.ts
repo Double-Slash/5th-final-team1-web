@@ -23,10 +23,11 @@ const StyleReset = createGlobalStyle`
     article, aside, canvas, details, embed,
     figure, figcaption, footer, header, hgroup,
     menu, nav, output, ruby, section, summary,
-    time, mark, audio, video {
+    time, mark, audio, video, button {
         margin: 0;
         padding: 0;
         border: 0;
+        outline:0;
     }
     article, aside, details, figcaption, figure,
     footer, header, hgroup, menu, nav, section {
@@ -42,7 +43,6 @@ const StyleReset = createGlobalStyle`
     a {
         text-decoration: none;
         outline: none;
-        color: #fff;
     }
 `;
 
