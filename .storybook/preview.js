@@ -12,4 +12,11 @@ export const decorators = [
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
+  backgrounds: {
+    default: "white",
+    values: [
+      { name: "white", value: "rgb(246,246,246)" },
+      { name: "black", value: "#000000" },
+    ],
+  },
 };
