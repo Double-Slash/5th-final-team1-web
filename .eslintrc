@@ -27,6 +27,7 @@
     "no-undef": "off",
     "no-param-reassign": "off",
     "no-use-before-define": "off",
+    "jsx-a11y/anchor-is-valid": "off",
     "linebreak-style": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx", ".ts", ".json"] }],
     "react/jsx-props-no-spreading": "off",
