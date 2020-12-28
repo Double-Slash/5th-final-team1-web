@@ -18,7 +18,8 @@ const Header = () => {
             <LinkGroup linkNamingList={linkNamingList} />
           </nav>
           <div className="right-buttons">
-            <Link name="LOG IN" />
+            {/* TO DO...LOG IN 버튼은 서버와 협의 필요 */}
+            <Link to="LOG IN">LOG IN</Link>
             <Button onClick={() => {}} isLinked>
               <BsSearch />
             </Button>

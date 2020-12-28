@@ -8,10 +8,9 @@ export default {
   component: Header,
 } as Meta;
 
-// 텍스트만 있는 버튼
-const TextHeaderTemplate = () => (
+const HeaderTemplate = () => (
   <MemoryRouter>
     <Header />
   </MemoryRouter>
 );
-export const TextHeader = TextHeaderTemplate.bind({});
+export const DefaultHeader = HeaderTemplate.bind({});
