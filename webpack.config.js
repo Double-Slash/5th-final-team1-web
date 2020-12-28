@@ -60,22 +60,22 @@ module.exports = () => {
           },
           exclude: path.join(__dirname, "node_modules"),
         },
-        {
-          test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-          loader: "url-loader",
-          options: {
-            limit: 10000,
-            outputPath: "static/media",
-            name: "[name].[hash:8].[ext]",
-          },
-        },
+        // {
+        //   test: /\.(png|jpe?g|gif)$/i,
+        //   loader: "url-loader",
+        //   options: {
+        //     limit: 10000,
+        //     outputPath: "static/media",
+        //     name: "[name].[ext]?[hash]",
+        //   },
+        // },
         {
           test: /\.(png|jpe?g|gif)$/i,
           use: [
             {
               loader: "file-loader",
               options: {
-                name: "static/media/[name].[hash:8].[ext]",
+                outputPath: "static/media",
               },
             },
           ],
@@ -85,7 +85,7 @@ module.exports = () => {
     plugins: [
       isEnvDevelopment && new ReactRefreshWebpackPlugin(),
       isEnvDevelopment && new webpack.HotModuleReplacementPlugin(),
-      isEnvDevelopment && new BundleAnalyzerPlugin({ analyzerMode: "server", openAnalyzer: false }),
+      isEnvDevelopment && new BundleAnalyzerPlugin({ analyzerMode: "server", analyzerPort: 4000, openAnalyzer: false }),
       isEnvProduction && new BundleAnalyzerPlugin({ analyzerMode: "static" }),
       isEnvProduction && new webpack.LoaderOptionsPlugin({ minimize: true }),
       new webpack.EnvironmentPlugin({ NODE_ENV: isEnvDevelopment ? "development" : "production" }),
