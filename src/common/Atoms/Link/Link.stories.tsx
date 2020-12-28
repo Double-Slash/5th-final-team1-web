@@ -6,24 +6,17 @@ import Link, { LinkProps } from "./index";
 export default {
   title: "atoms/Link",
   component: Link,
-  decorators: [
-    (StoryDecorator) => (
-      <div style={{ background: "black" }}>
-        <StoryDecorator />
-      </div>
-    ),
-  ],
 } as Meta;
 
 const Template: Story<LinkProps> = (args) => (
   <>
     <MemoryRouter>
-      <Link {...args} />
+      <Link {...args}>LOG IN</Link>
     </MemoryRouter>
   </>
 );
 
 export const DefaultLink = Template.bind({});
 DefaultLink.args = {
-  name: "name",
+  to: "to",
 };

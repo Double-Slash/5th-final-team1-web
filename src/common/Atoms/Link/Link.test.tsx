@@ -6,7 +6,7 @@ import Link, { LinkProps } from "./index";
 
 describe("<Link />", () => {
   const initialProps: LinkProps = {
-    name: "name",
+    to: "to",
   };
 
   const setup = (props: Partial<LinkProps> = {}) => {
@@ -20,24 +20,18 @@ describe("<Link />", () => {
     return { link, wrapper };
   };
 
-  it("props는 name을 받는다", () => {
-    const { wrapper } = setup();
-    expect(wrapper.props().name).toBe("name");
-  });
-
-  it("전달받은 name을 link 내부에 출력시킨다", () => {
-    const { link } = setup({ name: "Profile" });
-    expect(link.text()).toBe("Profile");
-  });
-
-  it("Link의 to는 name의 lowerCase가 된다", () => {
-    const { link } = setup({ name: "Project" });
-    expect(link.props().to).toBe("/project");
+  it("Link의 to는 link props가 된다", () => {
+    const { link: link1 } = setup({ to: "Project" });
+    const { link: link2 } = setup({ to: "project" });
+    const { link: link3 } = setup({ to: "안녕하세요" });
+    expect(link1.props().to).toBe("/Project");
+    expect(link2.props().to).toBe("/project");
+    expect(link3.props().to).toBe("/안녕하세요");
   });
 
   it("Link를 클릭할 경우, 해당 페이지로 이동한다", () => {
     const dom = new JSDOM();
-    const { link } = setup({ name: "QnA" });
+    const { link } = setup({ to: "QnA" });
     dom.reconfigure({ url: "https://www.blahblah.com/qna" });
     link.simulate("click");
     expect(dom.window.location.pathname).toBe("/qna");
