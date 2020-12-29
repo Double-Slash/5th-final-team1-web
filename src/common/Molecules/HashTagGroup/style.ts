@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
 export const Layout = styled.div`
-  height: 100%;
+  a:not(:last-child) {
+    margin-right: 16px;
+  }
 `;
