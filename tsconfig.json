@@ -22,6 +22,7 @@
       "@pages/*": ["pages/*"],
       "@static/*": ["static/*"],
       "@store/*": ["store/*"],
+      "@typings/*": ["typings/*"],
       "@utils/*": ["utils/*"]
     }
   },
