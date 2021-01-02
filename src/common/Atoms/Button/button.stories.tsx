@@ -4,7 +4,7 @@ import { Meta, Story } from "@storybook/react/types-6-0";
 import Button, { ButtonProps } from "./index";
 
 export default {
-  title: "atoms/Button2",
+  title: "atoms/Button",
   component: Button,
   parameters: {
     backgrounds: {
@@ -52,9 +52,3 @@ export const WithIconButton = WithIconButtonTemplate.bind({});
 WithIconButton.args = {
   onClick: () => {},
 };
-
-// const LinkButtonTemplate: Story<ButtonProps> = (args) => (
-//   <MemoryRouter>
-//     <Button {...args} />
-//   </MemoryRouter>
-// );

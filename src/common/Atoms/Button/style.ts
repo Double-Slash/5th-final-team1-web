@@ -16,7 +16,7 @@ interface ButtonProps {
 }
 
 export const Button = styled.button<ButtonProps>`
-  width: ${(props) => `${props.width}px`};
+  width: ${(props) => (props.width ? `${props.width}px` : "auto")};
   padding: 16px;
   background: ${(props) => props.buttonColor || "transparent"};
   color: ${(props) => props.fontColor || "white"};
