@@ -1,11 +1,10 @@
 import React, { useCallback } from "react";
 import { IconBaseProps } from "react-icons/lib";
-
 import Button from "@common/Atoms/Button";
 import * as S from "./style";
 import data from "./data";
 
-const EditorToolbar = () => {
+const MarkDownToolBar = () => {
   const onClickButton = useCallback((type: string) => {
     if (!window.codeMirror) return;
     const { codeMirror } = window;
@@ -347,18 +346,16 @@ const EditorToolbar = () => {
   return (
     <>
       <S.List>
-        {data.map((button) => {
-          return (
-            <S.ButtonWrapper key={button.type}>
-              <Button fontColor="black" isLinked={false} onClick={() => onClickButton(button.type)}>
-                {button.icon(button.icon as IconBaseProps)}
-              </Button>
-            </S.ButtonWrapper>
-          );
-        })}
+        {data.map((button) => (
+          <li key={button.type} className={button.type}>
+            <Button fontColor="black" isLinked={false} onClick={() => onClickButton(button.type)}>
+              {button.icon(button.icon as IconBaseProps)}
+            </Button>
+          </li>
+        ))}
       </S.List>
     </>
   );
 };
 
-export default EditorToolbar;
+export default MarkDownToolBar;

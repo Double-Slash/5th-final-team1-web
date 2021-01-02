@@ -23,6 +23,7 @@ module.exports = () => {
         "@pages": path.resolve(__dirname, "src", "pages"),
         "@static": path.resolve(__dirname, "src", "static"),
         "@store": path.resolve(__dirname, "src", "store"),
+        "@typings": path.resolve(__dirname, "src", "typings"),
         "@utils": path.resolve(__dirname, "src", "utils"),
       },
     },

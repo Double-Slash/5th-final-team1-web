@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import codemirror, { EditorFromTextArea } from "codemirror";
-import { changeMarkDownText } from "@store/Write/action";
+import { changeMarkDownText } from "@store/MarkDown/action";
 import * as S from "./style";
 
 import "codemirror/addon/display/placeholder";
@@ -12,7 +12,7 @@ require("codemirror/mode/markdown/markdown");
 require("codemirror/mode/javascript/javascript");
 require("codemirror/mode/jsx/jsx");
 
-const MarkDownEditor = () => {
+const MarkDownInput = () => {
   const dispatch = useDispatch();
   const codeMirrorRef = useRef<EditorFromTextArea | null>(null);
 
@@ -43,4 +43,4 @@ const MarkDownEditor = () => {
   );
 };
 
-export default MarkDownEditor;
+export default MarkDownInput;

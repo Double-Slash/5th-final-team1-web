@@ -1,10 +1,9 @@
 import React from "react";
-
 import EditorFooter from "@components/Write/EditorFooter";
 import EditorPreview from "@components/Write/EditorPreview";
-import EditorToolbar from "@components/Write/EditorToolbar";
-import MarkDownEditor from "@components/Write/MarkDownEditor";
 import TitleInput from "@components/Write/TitleInput";
+import MarkDownInput from "@common/Organisms/MarkDownInput";
+import MarkDownToolBar from "@common/Organisms/MarkDownToolBar";
 import * as S from "./style";
 
 const Write = () => {
@@ -13,8 +12,8 @@ const Write = () => {
       <S.Layout>
         <S.Section className="left-section">
           <TitleInput />
-          <EditorToolbar />
-          <MarkDownEditor />
+          <MarkDownToolBar />
+          <MarkDownInput />
           <EditorFooter />
         </S.Section>
         <S.Section className="right-section">

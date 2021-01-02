@@ -6,8 +6,8 @@ import MarkDownRendering from "@common/Organisms/MarkDownRendering";
 import * as S from "./style";
 
 const EditorPreview = () => {
-  const title = useSelector((state: rootState) => state.write.title);
-  const markDownText = useSelector((state: rootState) => state.write.markDownText);
+  const title = useSelector((state: rootState) => state.markdown.title);
+  const markDownText = useSelector((state: rootState) => state.markdown.markDownText);
 
   return (
     <>
