@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import write from "./Write";
+import markdown from "./MarkDown";
 
 const rootReducer = combineReducers({
-  write,
+  markdown,
 });
 
 export type rootState = ReturnType<typeof rootReducer>;
