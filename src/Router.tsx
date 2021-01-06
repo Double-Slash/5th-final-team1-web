@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "@common/Organisms/Header";
 
 // page components
+const Callback = loadable(() => import("@pages/Callback"));
 const Post = loadable(() => import("@pages/Post"));
 const Write = loadable(() => import("@pages/Write"));
 
@@ -15,6 +16,7 @@ const Router = () => {
         <Switch>
           <Route path="/post" component={Post} exact />
           <Route path="/write" component={Write} exact />
+          <Route path="/callback" component={Callback} exact />
         </Switch>
       </BrowserRouter>
     </>
