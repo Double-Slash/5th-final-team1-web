@@ -1,4 +1,5 @@
 import React from "react";
+import BountyDragBar from "@components/Write/BountyDragBar";
 import EditorFooter from "@components/Write/EditorFooter";
 import EditorPreview from "@components/Write/EditorPreview";
 import TitleInput from "@components/Write/TitleInput";
@@ -14,6 +15,7 @@ const Write = () => {
           <TitleInput />
           <MarkDownToolBar />
           <MarkDownInput />
+          <BountyDragBar />
           <EditorFooter />
         </S.Section>
         <S.Section className="right-section">
