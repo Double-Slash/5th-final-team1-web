@@ -33,7 +33,7 @@ export const CommentHeader = styled.div`
   }
 `;
 
-export const CommentBody = styled.div<{ isChild: boolean }>`
+export const CommentBody = styled.div<{ isChild: number | undefined }>`
   margin: 8px 0;
   margin-left: ${(props) => (props.isChild ? "0px" : "64px")};
 `;
@@ -72,7 +72,7 @@ export const CommentFooter = styled.div`
   }
 `;
 
-export const ReCommentInput = styled.div`
+export const CommentForm = styled.form`
   display: flex;
   margin: 8px 0;
   img {
