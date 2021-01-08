@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 import { BsX } from "react-icons/bs";
 import { AiFillGithub } from "react-icons/ai";
 import Button from "@common/Atoms/Button";
+import { getAccessToken } from "@utils/modules/token";
 import * as S from "./style";
 
 export interface LogInCheckProps {
@@ -14,7 +15,7 @@ const LogInCheck = ({ onClick, children }: LogInCheckProps) => {
 
   // 로그인 체크 버튼 클릭
   const clickLogInCheck = useCallback(() => {
-    if (!window.sessionStorage.getItem("access_token")) {
+    if (!getAccessToken({ key: "access" })) {
       setOpenModal(true);
       document.body.style.overflow = "hidden";
       return;
@@ -26,11 +27,6 @@ const LogInCheck = ({ onClick, children }: LogInCheckProps) => {
   const clickCloseBtn = useCallback(() => {
     setOpenModal(false);
     document.body.style.overflow = "scroll";
-  }, []);
-
-  // 깃허브로 로그인 버튼 클릭
-  const clickGithubLogin = useCallback(() => {
-    // To Do...서버쪽과 로그인 인증 구현 예정
   }, []);
 
   return (
@@ -47,10 +43,14 @@ const LogInCheck = ({ onClick, children }: LogInCheckProps) => {
             <h1>로그인이 필요한 서비스입니다.</h1>
             <p>계정과 비밀번호 입력 없이</p>
             <p>깃허브로 로그인 해보세요</p>
-            <Button isLinked={false} onClick={clickGithubLogin} className="github-btn">
+            <S.GithubLoginBtn
+              href="https://github.com/login/oauth/authorize?client_id=6c8de3c4a5decadc66a3&redirect_url=http%3A%2F%2F54.180.86.254%2Faccounts%2Fgithub%2Flogin%2Fcallback%2F&state=oYkKDYBt&scope=user%3Aemail"
+              rel="noopener noreferrer"
+              aria-hidden="true"
+            >
               <AiFillGithub />
               <span>깃허브 아이디로 로그인</span>
-            </Button>
+            </S.GithubLoginBtn>
           </S.Modal>
         </S.ModalBackground>
       )}

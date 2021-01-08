@@ -34,17 +34,6 @@ export const Modal = styled.div`
     font-size: 1.1rem;
     font-weight: bold;
   }
-  .github-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    background: rgb(36, 36, 36);
-    margin-top: 16px;
-    span {
-      margin-left: 8px;
-    }
-  }
   h1 {
     font-size: 1.5rem;
     margin-bottom: 8px;
@@ -52,5 +41,19 @@ export const Modal = styled.div`
   p {
     font-size: 0.8rem;
     font-weight: bold;
+  }
+`;
+
+export const GithubLoginBtn = styled.a`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 16px;
+  background: rgb(36, 36, 36);
+  margin-top: 16px;
+  color: white;
+  span {
+    margin-left: 8px;
   }
 `;
