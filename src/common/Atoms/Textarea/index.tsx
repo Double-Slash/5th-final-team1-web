@@ -3,10 +3,11 @@ import * as S from "./style";
 
 export interface TextareaProps {
   onChange: (text: string) => void;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
   placeholder?: string;
 }
 
-const Textarea = ({ onChange, placeholder }: TextareaProps) => {
+const Textarea = ({ onChange, onKeyDown, placeholder }: TextareaProps) => {
   const [text, setText] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -23,7 +24,13 @@ const Textarea = ({ onChange, placeholder }: TextareaProps) => {
 
   return (
     <>
-      <S.Textarea ref={textareaRef} value={text} onChange={changeTextarea} placeholder={placeholder} />
+      <S.Textarea
+        ref={textareaRef}
+        value={text}
+        onKeyDown={onKeyDown}
+        onChange={changeTextarea}
+        placeholder={placeholder}
+      />
     </>
   );
 };
