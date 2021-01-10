@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { changeMarkDownTitle } from "@store/MarkDown/action";
-import { addToTag, removeToTag, changeDragBarGauge } from "@store/Write/action";
+import { addToTag, removeToTag } from "@store/Write/action";
 import Button from "@common/Atoms/Button";
 import Textarea from "@common/Atoms/Textarea";
 import * as S from "./style";

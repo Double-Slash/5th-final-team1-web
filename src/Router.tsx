@@ -14,7 +14,7 @@ const Router = () => {
       <BrowserRouter>
         <Header />
         <Switch>
-          <Route path="/post" component={Post} exact />
+          <Route path="/post/:id" component={Post} exact />
           <Route path="/write" component={Write} exact />
           <Route path="/callback" component={Callback} exact />
         </Switch>
