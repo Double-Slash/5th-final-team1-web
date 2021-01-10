@@ -1,20 +1,16 @@
 import React from "react";
 import MarkDownRendering from "@common/Organisms/MarkDownRendering";
-import { IPost } from "@typings/db";
-import { postDummy } from "@typings/db.dummy";
 import * as S from "./style";
 
 export interface PostContentProps {
-  postData: IPost;
+  body: string;
 }
 
-const PostContent = ({ postData = postDummy }: PostContentProps) => {
-  const { content } = postData;
-
+const PostContent = ({ body }: PostContentProps) => {
   return (
     <>
       <S.PostContent>
-        <MarkDownRendering markDownText={content} />
+        <MarkDownRendering markDownText={body} />
       </S.PostContent>
     </>
   );
