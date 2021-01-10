@@ -1,18 +1,20 @@
 import React from "react";
-import { Meta } from "@storybook/react/types-6-0";
-import { commentDummy } from "@typings/db.dummy";
-import CommentList from "./index";
+import { Meta, Story } from "@storybook/react/types-6-0";
+import CommentList, { CommentListProps } from "./index";
 
 export default {
   title: "post/CommentList",
   component: CommentList,
 } as Meta;
 
-const CommentListTemplate = () => {
+const CommentListTemplate: Story<CommentListProps> = (args) => {
   return (
     <>
-      <CommentList postData={[commentDummy, commentDummy]} />
+      <CommentList {...args} />
     </>
   );
 };
 export const DefaultCommentList = CommentListTemplate.bind({});
+DefaultCommentList.args = {
+  answers: [],
+};
