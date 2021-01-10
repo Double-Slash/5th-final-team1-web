@@ -1,24 +1,32 @@
 import React from "react";
 import Comment from "@common/Organisms/Comment";
-import { IComment } from "@typings/db";
+import { IAnswer } from "@typings/db";
 import * as S from "./style";
 
-interface CommentListProps {
-  postData: IComment[];
+export interface CommentListProps {
+  questionId: number;
+  answers: IAnswer[];
 }
 
-const CommentList = ({ postData }: CommentListProps) => {
+const CommentList = ({ answers, questionId }: CommentListProps) => {
   return (
     <>
       <S.Layout>
-        {postData.map((value) => (
-          <Comment
-            key={value.user.username + Math.floor(Math.random() * 1000)}
-            user={value.user}
-            content={value.content}
-            childComments={value.childComments}
-          />
-        ))}
+        {answers.map((answer) => {
+          const { id, author, created_at, body, num_likes, comments } = answer;
+          return (
+            <Comment
+              key={created_at}
+              questionId={questionId}
+              answerId={id}
+              author={author}
+              created_at={created_at}
+              body={body}
+              num_likes={num_likes}
+              comments={comments}
+            />
+          );
+        })}
       </S.Layout>
     </>
   );
