@@ -8,8 +8,10 @@ const defaultAxios = axios.create({
 });
 
 const createInstanceWithToken = () => {
-  const instance = defaultAxios;
-  defaultAxios.interceptors.request.use((config) => {
+  const instance = axios.create({
+    baseURL: `${SERVER_URL}/`,
+  });
+  instance.interceptors.request.use((config) => {
     const token = getAccessToken({ key: "access" });
     config.headers.Authorization = `Bearer ${token}`;
     return config;

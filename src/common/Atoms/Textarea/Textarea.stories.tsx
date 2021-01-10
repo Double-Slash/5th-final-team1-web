@@ -16,5 +16,6 @@ const Template: Story<TextareaProps> = (args) => (
 export const DefaultTextarea = Template.bind({});
 DefaultTextarea.args = {
   onChange: () => {},
+  onKeyDown: () => {},
   placeholder: "제목을 입력하세요",
 };
