@@ -1,4 +1,4 @@
-import { WriteAction, CHANGE_MARK_DOWN_TEXT, CHANGE_MARK_DOWN_TITLE } from "./action";
+import { MarkDownAction, CHANGE_MARK_DOWN_TEXT, CHANGE_MARK_DOWN_TITLE } from "./action";
 
 interface WriteState {
   title: string;
@@ -10,7 +10,7 @@ const initialState: WriteState = {
   markDownText: "",
 };
 
-const reducer = (state: WriteState = initialState, action: WriteAction) => {
+const reducer = (state: WriteState = initialState, action: MarkDownAction) => {
   switch (action.type) {
     case CHANGE_MARK_DOWN_TEXT:
       return { ...state, markDownText: action.payload };

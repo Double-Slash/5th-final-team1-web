@@ -10,6 +10,6 @@ export const Layout = styled.section`
   }
   .submit-btn {
     padding: 8px 24px;
-    margin-top: 8px;
+    margin-top: 16px;
   }
 `;

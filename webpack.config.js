@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = () => {
   const isEnvDevelopment = process.env.NODE_ENV === "development";
@@ -84,6 +85,7 @@ module.exports = () => {
       ],
     },
     plugins: [
+      new Dotenv(),
       isEnvDevelopment && new ReactRefreshWebpackPlugin(),
       isEnvDevelopment && new webpack.HotModuleReplacementPlugin(),
       isEnvDevelopment && new BundleAnalyzerPlugin({ analyzerMode: "server", analyzerPort: 4000, openAnalyzer: false }),

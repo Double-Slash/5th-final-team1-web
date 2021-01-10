@@ -1,32 +1,26 @@
 import React from "react";
 import HashTagGroup from "@common/Molecules/HashTagGroup";
-import ProfileImage from "@common/Atoms/ProfileImage";
-import { IPost } from "@typings/db";
-import { postDummy } from "@typings/db.dummy";
+// import ProfileImage from "@common/Atoms/ProfileImage";
+import calcDate from "@utils/modules/calcDate";
 import * as S from "./style";
 
 export interface PostTitleProps {
-  postData: IPost;
+  title: string;
+  hashtags: string[];
+  created_at: string;
 }
 
-const PostTitle = ({ postData = postDummy }: PostTitleProps) => {
-  const {
-    title,
-    hashTagList,
-    user: { username, thumbnail, rank },
-    date,
-  } = postData;
-
+const PostTitle = ({ title, hashtags, created_at }: PostTitleProps) => {
   return (
     <>
       <S.PostTitle>
-        <HashTagGroup namingList={hashTagList} />
+        <HashTagGroup namingList={hashtags} />
         <h1>{title}</h1>
         <div className="user-info">
-          <ProfileImage imageSrc={thumbnail} />
+          {/* <ProfileImage imageSrc={thumbnail} />
           <h2>{username}</h2>
-          <h3>{rank}</h3>
-          <span>{date}</span>
+          <h3>{rank}</h3> */}
+          <span>{calcDate({ date: created_at })}</span>
         </div>
       </S.PostTitle>
     </>

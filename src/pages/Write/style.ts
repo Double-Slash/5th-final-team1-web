@@ -17,6 +17,7 @@ export const Section = styled.section`
     left: 0;
     display: flex;
     flex-direction: column;
+    padding: 32px 48px;
     background: white;
   }
   &.right-section {

@@ -1,9 +1,11 @@
 import { applyMiddleware, combineReducers, compose, createStore, Middleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import markdown from "./MarkDown";
+import write from "./Write";
 
 const rootReducer = combineReducers({
   markdown,
+  write,
 });
 
 const store = () => {

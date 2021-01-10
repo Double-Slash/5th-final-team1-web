@@ -6,7 +6,6 @@ export const Textarea = styled.textarea`
   resize: none;
   outline: none;
   border-image: initial;
-  border-radius: 4px;
   overflow-y: hidden;
   background: transparent;
 `;
