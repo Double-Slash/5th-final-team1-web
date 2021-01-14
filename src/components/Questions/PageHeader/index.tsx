@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "@common/Atoms/Link";
 import { getAccessToken } from "@utils/modules/token";
-import QuestionListSvg from "@static/questionListSvg";
+import QnaHeaderSvg from "@static/qnaHeaderSvg";
 import * as S from "./style";
 
 const PageHeader = () => {
@@ -15,7 +15,7 @@ const PageHeader = () => {
             Your Problem
           </h1>
           <div className="wrapper">
-            <QuestionListSvg />
+            <QnaHeaderSvg />
             {getAccessToken({ key: "access" }) && <Link to="write">질문하기</Link>}
           </div>
         </S.Wrapper>
