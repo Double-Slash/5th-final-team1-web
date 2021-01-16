@@ -1,32 +1,32 @@
 import React from "react";
-import Comment from "@common/Organisms/Comment";
+// import Answer from "@common/Organisms/Answer";
 import { IAnswer } from "@typings/db";
 import * as S from "./style";
 
 export interface CommentListProps {
-  questionId: number;
   answers: IAnswer[];
 }
 
-const CommentList = ({ answers, questionId }: CommentListProps) => {
+const CommentList = () => {
   return (
     <>
       <S.Layout>
-        {answers.map((answer) => {
-          const { id, author, created_at, body, num_likes, comments } = answer;
+        {/* {answers.map((answer) => {
+          const { author, author_name, body, comments, created_at, edited_at, id, num_likes } = answer;
           return (
-            <Comment
+            <Answer
               key={created_at}
-              questionId={questionId}
-              answerId={id}
               author={author}
-              created_at={created_at}
+              author_name={author_name}
               body={body}
-              num_likes={num_likes}
               comments={comments}
+              created_at={created_at}
+              edited_at={edited_at}
+              id={id}
+              num_likes={num_likes}
             />
           );
-        })}
+        })} */}
       </S.Layout>
     </>
   );
