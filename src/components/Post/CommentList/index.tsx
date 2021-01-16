@@ -4,10 +4,11 @@ import { IAnswer } from "@typings/db";
 import * as S from "./style";
 
 export interface CommentListProps {
+  questionId?: number;
   answers: IAnswer[];
 }
 
-const CommentList = () => {
+const CommentList = ({ answers }: CommentListProps) => {
   return (
     <>
       <S.Layout>
