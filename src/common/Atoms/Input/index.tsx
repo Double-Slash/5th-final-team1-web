@@ -1,28 +1,37 @@
 import React from "react";
 import * as S from "./style";
 
-type inputType = "text" | "email" | "password";
+type InputType = "text" | "email" | "password";
 
 export interface InputProps {
-  disabled?: boolean;
-  //   isEntered?: boolean;
-  maxLength?: number;
+  disabled?: boolean; // input 비활성화
+  maxLength?: number; // value 최대 길이
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   placeholder?: string;
-  type?: inputType;
+  type?: InputType;
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input: React.FC<InputProps> = ({ disabled = false, maxLength = 20, placeholder, type, value, onChange }) => {
+const Input: React.FC<InputProps> = ({
+  disabled = false,
+  maxLength,
+  onChange,
+  onKeyDown,
+  placeholder,
+  type,
+  value,
+}) => {
   return (
     <>
       <S.Input
         disabled={disabled}
+        maxLength={maxLength}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
         placeholder={placeholder}
         type={type}
-        maxLength={maxLength}
         value={value}
-        onChange={onChange}
       />
     </>
   );
