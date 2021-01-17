@@ -9,9 +9,10 @@ import * as S from "./style";
 
 interface MarkDownRenderingProps {
   markDownText: string;
+  className?: string;
 }
 
-const MarkDownRendering: React.FC<MarkDownRenderingProps> = ({ markDownText }) => {
+const MarkDownRendering = ({ className, markDownText }: MarkDownRenderingProps) => {
   const [html, setHtml] = useState("");
 
   useEffect(() => {
@@ -27,7 +28,7 @@ const MarkDownRendering: React.FC<MarkDownRenderingProps> = ({ markDownText }) =
 
   return (
     <>
-      <S.MarkdownWrapper className="atom-one-dark">{reactParser(html)}</S.MarkdownWrapper>
+      <S.MarkdownWrapper className={`${className || ""} atom-one-dark`}>{reactParser(html)}</S.MarkdownWrapper>
     </>
   );
 };

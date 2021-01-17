@@ -6,8 +6,8 @@ export const getBountedQuestions = () => {
 };
 
 // 전체 글 GET
-export const getQuestions = () => {
-  return defaultAxios.get("/questions/viewset/");
+export const getQuestions = (offset?: number, limit?: number) => {
+  return defaultAxios.get(`/questions/viewset/?offset=${offset}&limit=${limit}`);
 };
 
 // 질문 상세글 GET
