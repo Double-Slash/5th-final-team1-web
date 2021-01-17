@@ -11,7 +11,7 @@ const LinkGroup = ({ linkNamingList }: LinkGroupProps) => {
     <>
       <S.Nav>
         {linkNamingList.map((value) => (
-          <Link key={value} to={value}>
+          <Link key={value} to={value.toLowerCase()}>
             {value}
           </Link>
         ))}

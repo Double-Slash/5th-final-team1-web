@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 export const Layout = styled.li`
   padding: 8px 0;
-  margin: 16px 0;
-  border-bottom: 1px solid gray;
+  margin-bottom: 4px;
   .comment-conatiner {
     display: flex;
     width: 100%;
@@ -19,9 +18,6 @@ export const Layout = styled.li`
 
 export const CommentHeader = styled.div`
   display: flex;
-  .user-name {
-    margin-right: 8px;
-  }
   img {
     margin-right: 16px;
   }
@@ -31,16 +27,26 @@ export const CommentHeader = styled.div`
   span {
     color: gray;
   }
+  .user-name {
+    margin-right: 8px;
+    color: black;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
 `;
 
-export const CommentBody = styled.div<{ isChild: number | undefined }>`
-  margin: 8px 0;
-  margin-left: ${(props) => (props.isChild ? "0px" : "64px")};
+export const CommentBody = styled.div`
+  margin-bottom: 4px;
+  margin-left: 56px;
+  p {
+    margin: 0;
+  }
 `;
 
 export const CommentFooter = styled.div`
   display: flex;
   margin: 8px 0;
+  margin-left: 56px;
   svg {
     color: gray;
     cursor: pointer;
@@ -73,12 +79,27 @@ export const CommentFooter = styled.div`
 `;
 
 export const CommentForm = styled.form`
-  display: flex;
   margin: 8px 0;
   img {
     margin-right: 8px;
   }
   textarea {
     border-bottom: 1px solid gray;
+  }
+  button {
+    padding: 8px 16px;
+  }
+  .input-wrapper {
+    display: flex;
+  }
+  .button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+  }
+  .return-right-icon {
+    font-size: 24px;
+    margin-right: 8px;
+    color: gray;
   }
 `;

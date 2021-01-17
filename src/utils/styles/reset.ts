@@ -44,6 +44,13 @@ const StyleReset = createGlobalStyle`
         text-decoration: none;
         outline: none;
     }
+    h1, h2, h3, h4, h5, h6 {
+        font-size:1rem;
+    }
+    input {
+        outline: none;
+        border: none;
+    }
     #root {
         background:rgb(246,246,246);
     }

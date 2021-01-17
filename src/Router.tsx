@@ -5,8 +5,11 @@ import Header from "@common/Organisms/Header";
 
 // page components
 const Callback = loadable(() => import("@pages/Callback"));
+const Questions = loadable(() => import("@pages/Questions"));
 const Post = loadable(() => import("@pages/Post"));
+const Project = loadable(() => import("@pages/Project"));
 const Write = loadable(() => import("@pages/Write"));
+const WriteProject = loadable(() => import("@pages/WriteProject"));
 
 const Router = () => {
   return (
@@ -14,8 +17,11 @@ const Router = () => {
       <BrowserRouter>
         <Header />
         <Switch>
+          <Route path="/qna" component={Questions} exact />
           <Route path="/post/:id" component={Post} exact />
+          <Route path="/project/:id" component={Project} exact />
           <Route path="/write" component={Write} exact />
+          <Route path="/write/project" component={WriteProject} exact />
           <Route path="/callback" component={Callback} exact />
         </Switch>
       </BrowserRouter>
