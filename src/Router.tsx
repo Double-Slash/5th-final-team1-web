@@ -5,6 +5,7 @@ import Header from "@common/Organisms/Header";
 
 // page components
 const Callback = loadable(() => import("@pages/Callback"));
+const Home = loadable(() => import("@pages/Home"));
 const Questions = loadable(() => import("@pages/Questions"));
 const Post = loadable(() => import("@pages/Post"));
 const Project = loadable(() => import("@pages/Project"));
@@ -17,6 +18,7 @@ const Router = () => {
       <BrowserRouter>
         <Header />
         <Switch>
+          <Route path="/" component={Home} exact />
           <Route path="/qna" component={Questions} exact />
           <Route path="/post/:id" component={Post} exact />
           <Route path="/project/:id" component={Project} exact />
