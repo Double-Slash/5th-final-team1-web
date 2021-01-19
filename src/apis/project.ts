@@ -1,4 +1,4 @@
-import { withTokenAxios } from "./index";
+import { defaultAxios, withTokenAxios } from "./index";
 
 interface IPostJobPostings {
   body: string;
@@ -29,4 +29,14 @@ export const postJobPostings = ({
     hashtags,
     title,
   });
+};
+
+// 프로젝트 상세 페이지 불러오기 GET
+export const getProjectDetail = ({ id }: { id: string }) => {
+  return defaultAxios.get(`/jobpostings/viewset/${id}/`);
+};
+
+// 전체 프로젝트 리스트 불러오기 GET
+export const getProjectList = (offset?: number, limit?: number) => {
+  return defaultAxios.get(`/jobpostings/viewset/?offset=${offset}&limit=${limit}`);
 };
