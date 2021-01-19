@@ -18,7 +18,6 @@ const Template: Story<IQuestionListItem> = () => {
   const title = text("title", "제목");
   const body = text("body", "본문 부분");
   const created_at = text("created_at", "2021.01.09");
-  const edited_at = text("edited_at", "2021.01.09");
 
   return (
     <>
@@ -30,10 +29,7 @@ const Template: Story<IQuestionListItem> = () => {
           author_name={author_name}
           title={title}
           body={body}
-          bounty={20}
           created_at={created_at}
-          edited_at={edited_at}
-          author={Math.floor(Math.random() * 1000) + 1}
         />
       </MemoryRouter>
     </>
