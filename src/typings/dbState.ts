@@ -1,4 +1,4 @@
-import { IQuestion, IAnswer, IComment } from "./db";
+import { IAnswer, IComment, IProjectDetail, IQuestion } from "./db";
 
 export const commentInitialState: IComment = {
   id: 1,
@@ -35,4 +35,20 @@ export const questionInitialState: IQuestion = {
   bounty: 1,
   created_at: "",
   edited_at: "",
+};
+
+// 프로젝트 상세 initial state
+export const projectInitialState: IProjectDetail = {
+  id: 1,
+  author_name: "",
+  author: 1,
+  body: "",
+  crew_field: "",
+  crew_count: "",
+  crew_recruit: "",
+  crew_condition: "",
+  created_at: "",
+  edited_at: "",
+  hashtags: [],
+  title: "",
 };
