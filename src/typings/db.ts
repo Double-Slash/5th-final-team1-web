@@ -34,6 +34,7 @@ export interface IQuestionList {
   questions: IQuestionListItem[];
 }
 
+// 답변 data
 export interface IAnswer {
   author: number;
   author_name: string;
@@ -45,6 +46,7 @@ export interface IAnswer {
   num_likes: number;
 }
 
+// 댓글 data
 export interface IComment {
   answer: number;
   author: number;
@@ -55,4 +57,28 @@ export interface IComment {
   id: number;
   num_likes: number;
   question: number;
+}
+
+// 프로젝트 상세 data
+export interface IProjectDetail {
+  id: number;
+  author_name: string;
+  author: number;
+  body: string;
+  crew_field: string;
+  crew_count: string;
+  crew_recruit: string;
+  crew_condition: string;
+  created_at: string;
+  edited_at: string;
+  hashtags: string[];
+  title: string;
+}
+
+// 질문글 list data
+export interface IProjectDetailList {
+  limit: number;
+  offset: number;
+  overall_count: number;
+  jobpostings: IProjectDetail[];
 }

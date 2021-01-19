@@ -7,10 +7,11 @@ interface IUseInfiniteScroll {
   loadingRef: RefObject<Element>;
   api: (offset?: number, limit?: number) => Promise<AxiosResponse<any>>;
   limit?: number;
+  listName: string;
   threshold?: number;
 }
 
-function UseInfiniteScroll<T>({ api, loadingRef, limit = 10, threshold = 1 }: IUseInfiniteScroll) {
+function UseInfiniteScroll<T>({ api, loadingRef, listName, limit = 10, threshold = 1 }: IUseInfiniteScroll) {
   const [result, setResult] = useState<T | undefined>(undefined);
   const [hasMore, setHasMore] = useState(true);
   const lastId = useRef(0);
@@ -20,7 +21,7 @@ function UseInfiniteScroll<T>({ api, loadingRef, limit = 10, threshold = 1 }: IU
       if (entry.isIntersecting && hasMore) {
         observer.unobserve(entry.target);
         const { data } = await api(lastId.current, limit);
-        lastId.current = data.questions.length;
+        lastId.current = data[listName].length;
         setResult(data);
         if (lastId.current < limit) {
           observer.unobserve(entry.target);
@@ -30,7 +31,7 @@ function UseInfiniteScroll<T>({ api, loadingRef, limit = 10, threshold = 1 }: IU
         }
       }
     },
-    [api, hasMore, limit],
+    [api, hasMore, limit, listName],
   );
 
   useEffect(() => {
