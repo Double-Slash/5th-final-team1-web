@@ -32,3 +32,11 @@ export const Header = styled.header`
     padding: 0 20px;
   }
 `;
+
+export const Logo = styled.div`
+  width: 20%;
+  img {
+    width: 96px;
+    height: 40px;
+  }
+`;
