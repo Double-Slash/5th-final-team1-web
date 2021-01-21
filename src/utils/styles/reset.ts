@@ -52,6 +52,7 @@ const StyleReset = createGlobalStyle`
         border: none;
     }
     #root {
+        min-height: 100vh;
         background:rgb(246,246,246);
     }
 `;
