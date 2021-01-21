@@ -19,6 +19,14 @@ export const LeftWrapper = styled.div`
   p {
     color: gray;
   }
+  .hash-tag-list {
+    display: flex;
+    align-items: center;
+    .login-check {
+      margin-left: auto;
+      font-size: 20px;
+    }
+  }
   .card-header {
     display: flex;
     align-items: center;

@@ -1,5 +1,6 @@
-import React, { memo, useMemo } from "react";
+import React, { useMemo } from "react";
 import Link from "@common/Atoms/Link";
+import LikeButton from "@common/Atoms/LikeButton";
 import ProfileImage from "@common/Atoms/ProfileImage";
 import UserName from "@common/Atoms/UserName";
 import HashTagGroup from "@common/Molecules/HashTagGroup";
@@ -13,10 +14,12 @@ interface QuestionCardProps {
   created_at: string;
   hashtags: string[];
   id: number;
+  is_liked: boolean;
+  like_id: number;
   title: string;
 }
 
-const QuestionCard = ({ id, hashtags, author_name, title, body, created_at }: QuestionCardProps) => {
+const QuestionCard = ({ author_name, body, created_at, hashtags, id, is_liked, like_id, title }: QuestionCardProps) => {
   const markDownText = useMemo(() => replaceMarkDownText(body), [body]);
 
   return (
@@ -24,13 +27,15 @@ const QuestionCard = ({ id, hashtags, author_name, title, body, created_at }: Qu
       <S.QuestionCard>
         <div className="container">
           <S.LeftWrapper>
-            <HashTagGroup namingList={hashtags} />
+            <div className="hash-tag-list">
+              <HashTagGroup namingList={hashtags} />
+              <LikeButton is_liked={is_liked} like_id={like_id} question={id} />
+            </div>
             <div className="card-header">
               <Link to={`post/${id}`}>
                 <h1>{title.length <= 20 ? title : `${title.substring(0, 20).trim()}...`}</h1>
               </Link>
               <span>{calcDate({ date: created_at })}</span>
-              {/* <span>{answers.length}개의 답글</span> */}
             </div>
             <Link to={`post/${id}`}>
               <p>{markDownText.length <= 50 ? markDownText : `${markDownText.substring(0, 50).trim()}...`}</p>
@@ -43,45 +48,6 @@ const QuestionCard = ({ id, hashtags, author_name, title, body, created_at }: Qu
               <span>플래티넘</span>
             </div>
           </S.RightWrapper>
-          {/* {isLoad ? (
-            <>
-              <S.LeftWrapper>
-                <HashTagGroup namingList={hashtags} />
-                <div className="card-header">
-                  <Link to={`post/${id}`}>
-                    <h1>{title.length <= 20 ? title : `${title.substring(0, 20).trim()}...`}</h1>
-                  </Link>
-                  <span>{calcDate({ date: created_at })}</span>
-                   <span>{answers.length}개의 답글</span> 
-                </div>
-                <Link to={`post/${id}`}>
-                  <p>{markDownText.length <= 50 ? markDownText : `${markDownText.substring(0, 50).trim()}...`}</p>
-                </Link>
-              </S.LeftWrapper>
-              <S.RightWrapper>
-                <ProfileImage imageSrc={author_name} radius={56} />
-                <div>
-                  <UserName username={author_name} className="user-name" />
-                  <span>플래티넘</span>
-                </div>
-              </S.RightWrapper>
-            </>
-          ) : (
-            <>
-              <S.LeftSkeleton>
-                <div className="hashtags">
-                  <div className="tag" />
-                  <div className="tag" />
-                  <div className="tag" />
-                </div>
-                <div className="title" />
-                <div className="content" />
-              </S.LeftSkeleton>
-              <S.RightSkeleton>
-                <div className="info" />
-              </S.RightSkeleton>
-            </>
-          )} */}
         </div>
         <div className="divider" />
       </S.QuestionCard>
@@ -89,4 +55,4 @@ const QuestionCard = ({ id, hashtags, author_name, title, body, created_at }: Qu
   );
 };
 
-export default memo(QuestionCard);
+export default QuestionCard;
