@@ -9,21 +9,25 @@ export interface IQuestion {
   edited_at: string;
   hashtags: string[];
   id: number;
+  is_liked: boolean;
+  like_id: number;
   num_likes: number;
   title: string;
 }
 
 // 질문글 list item data
 export interface IQuestionListItem {
-  id: number;
-  hashtags: string[];
+  author: number;
   author_name: string;
-  title: string;
   body: string;
   bounty: number;
   created_at: string;
   edited_at: string;
-  author: number;
+  hashtags: string[];
+  id: number;
+  is_liked: boolean;
+  like_id: number;
+  title: string;
 }
 
 // 질문글 list data
@@ -43,7 +47,10 @@ export interface IAnswer {
   created_at: string;
   edited_at: string;
   id: number;
-  num_likes: number;
+  is_adopted: boolean;
+  is_liked: "None" | boolean;
+  like_id: "None" | number;
+  num_likes: [number, number];
 }
 
 // 댓글 data
@@ -55,13 +62,13 @@ export interface IComment {
   created_at: string;
   edited_at: string;
   id: number;
-  num_likes: number;
-  question: number;
+  is_liked: "None" | boolean;
+  like_id: "None" | number;
+  num_likes: [number, number];
 }
 
 // 프로젝트 상세 data
 export interface IProjectDetail {
-  id: number;
   author_name: string;
   author: number;
   body: string;
@@ -72,6 +79,9 @@ export interface IProjectDetail {
   created_at: string;
   edited_at: string;
   hashtags: string[];
+  id: number;
+  is_liked: boolean;
+  like_id: number;
   title: string;
 }
 
