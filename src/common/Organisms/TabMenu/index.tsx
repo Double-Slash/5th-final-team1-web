@@ -13,6 +13,7 @@ interface TabListProps {
 
 interface TabPanelProps extends Children {
   index: number;
+  className?: string;
 }
 
 // 탭 메뉴
@@ -59,7 +60,7 @@ export const TabList = ({ tabButtonList }: TabListProps) => {
 };
 
 // panel
-export const TabPanel = ({ children, index }: TabPanelProps) => {
+export const TabPanel = ({ children, index, className }: TabPanelProps) => {
   const { tabBtnIndex } = useContext(TabMenuContext);
   const panelRef = useRef<HTMLDivElement>(null);
 
@@ -71,7 +72,7 @@ export const TabPanel = ({ children, index }: TabPanelProps) => {
 
   return (
     <>
-      <S.TabPanel ref={panelRef} className={`tab-panel ${index === 0 ? "active" : ""}`}>
+      <S.TabPanel ref={panelRef} className={`tab-panel ${className} ${index === 0 ? "active" : ""}`}>
         {children}
       </S.TabPanel>
     </>
