@@ -1,3 +1,4 @@
+import hasAccessToken from "@apis/utils/hasAccessToken";
 import { withTokenAxios } from "./index";
 
 interface IPostJobPostings {
@@ -29,4 +30,14 @@ export const postJobPostings = ({
     hashtags,
     title,
   });
+};
+
+// 프로젝트 상세 페이지 불러오기 GET
+export const getProjectDetail = ({ id }: { id: string }) => {
+  return hasAccessToken({ url: `/jobpostings/viewset/${id}/` });
+};
+
+// 전체 프로젝트 리스트 불러오기 GET
+export const getProjectList = (offset?: number, limit?: number) => {
+  return hasAccessToken({ url: `/jobpostings/viewset/?offset=${offset}&limit=${limit}` });
 };

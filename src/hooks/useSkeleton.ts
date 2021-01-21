@@ -1,14 +1,15 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+/* eslint-disable consistent-return */
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 
 interface IUseSkeleton {
-  skeletonRef: React.RefObject<Element>;
   threshold?: number;
 }
 
-function UseSkeleton({ skeletonRef, threshold }: IUseSkeleton) {
+function UseSkeleton<T extends HTMLElement>({ threshold }: IUseSkeleton): [boolean, React.RefObject<T>] {
   const [isLoad, setIsLoad] = useState(false);
   const [lazyLoading, setLazyLoading] = useState(false);
   const observer = useRef<IntersectionObserver | undefined>(undefined);
+  const skeletonRef = useRef<T>(null);
 
   const onIntersection: IntersectionObserverCallback = useCallback(([entry], io) => {
     if (entry.isIntersecting) {
@@ -17,13 +18,17 @@ function UseSkeleton({ skeletonRef, threshold }: IUseSkeleton) {
     }
   }, []);
 
-  useEffect(() => {
-    if (!skeletonRef.current) return;
+  useLayoutEffect(() => {
+    if (!skeletonRef?.current) return;
     if (!observer.current) {
       const options = { root: null, rootMargin: "0px", threshold };
       observer.current = new IntersectionObserver(onIntersection, options);
     }
     observer.current.observe(skeletonRef.current);
+    return () => {
+      if (!observer.current) return;
+      return observer.current.disconnect();
+    };
   }, [onIntersection, skeletonRef, threshold]);
 
   useEffect(() => {
@@ -33,7 +38,7 @@ function UseSkeleton({ skeletonRef, threshold }: IUseSkeleton) {
     }, 800);
   }, [isLoad]);
 
-  return [lazyLoading];
+  return [lazyLoading, skeletonRef];
 }
 
 export default UseSkeleton;

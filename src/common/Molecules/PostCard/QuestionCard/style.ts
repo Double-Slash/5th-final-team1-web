@@ -19,6 +19,14 @@ export const LeftWrapper = styled.div`
   p {
     color: gray;
   }
+  .hash-tag-list {
+    display: flex;
+    align-items: center;
+    .login-check {
+      margin-left: auto;
+      font-size: 20px;
+    }
+  }
   .card-header {
     display: flex;
     align-items: center;
@@ -56,44 +64,5 @@ export const RightWrapper = styled.div`
     font-size: 1.05rem;
     font-weight: bold;
     color: black;
-  }
-`;
-
-export const LeftSkeleton = styled.div`
-  width: 70%;
-  height: 100%;
-  .hashtags {
-    display: flex;
-    margin-bottom: 8px;
-    .tag {
-      width: 72px;
-      height: 24px;
-      margin-right: 16px;
-      background: #e8e8e8;
-    }
-  }
-  .title {
-    width: 160px;
-    height: 24px;
-    margin-bottom: 8px;
-    background: #e8e8e8;
-  }
-  .content {
-    width: 240px;
-    height: 16px;
-    background: #e8e8e8;
-  }
-`;
-
-export const RightSkeleton = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  width: 30%;
-  height: 120px;
-  padding: 16px;
-  .info {
-    width: 50%;
-    height: 100%;
-    background: #e8e8e8;
   }
 `;

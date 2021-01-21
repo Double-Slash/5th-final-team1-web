@@ -2,26 +2,31 @@
 import React, { useLayoutEffect, useState } from "react";
 import { useRouteMatch } from "react-router-dom";
 import { BsSearch, BsInboxFill } from "react-icons/bs";
+import Link from "@common/Atoms/Link";
 import LinkGroup from "@common/Molecules/LinkGroup";
-import Button from "@common/Atoms/Button";
 import { getAccessToken } from "@utils/modules/token";
+import Logo from "@static/img/logo.png";
 import * as S from "./style";
 
 const Header = () => {
   const match = useRouteMatch("/write");
-  const [isToken, setIsToken] = useState(false);
+  const [isToken, setIsToken] = useState("");
   const linkNamingList = ["QnA", "Tags", "Project", "Level"];
+  const result = getAccessToken({ key: "access" });
 
   useLayoutEffect(() => {
-    const result = getAccessToken({ key: "access" });
-    setIsToken(!!result);
-  }, []);
+    setIsToken(result || "");
+  }, [result]);
 
   return (
     <>
       {!match && (
         <S.Header>
-          <div className="logo" />
+          <S.Logo>
+            <Link to="">
+              <img src={Logo} alt="logo" />
+            </Link>
+          </S.Logo>
           <nav>
             <LinkGroup linkNamingList={linkNamingList} />
           </nav>
@@ -40,9 +45,9 @@ const Header = () => {
                 Log In
               </a>
             )}
-            <Button onClick={() => {}} isLinked>
-              <BsSearch />
-            </Button>
+            <Link to="search">
+              <BsSearch className="search" />
+            </Link>
           </div>
         </S.Header>
       )}

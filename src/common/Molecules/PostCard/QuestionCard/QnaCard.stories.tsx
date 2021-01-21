@@ -1,7 +1,7 @@
 import React from "react";
 import { MemoryRouter } from "react-router-dom";
 import { Meta, Story } from "@storybook/react/types-6-0";
-import { withKnobs, array, number, text } from "@storybook/addon-knobs";
+import { withKnobs, array, boolean, number, text } from "@storybook/addon-knobs";
 import { IQuestionListItem } from "@typings/db";
 import QuestionCard from "./index";
 
@@ -18,22 +18,21 @@ const Template: Story<IQuestionListItem> = () => {
   const title = text("title", "제목");
   const body = text("body", "본문 부분");
   const created_at = text("created_at", "2021.01.09");
-  const edited_at = text("edited_at", "2021.01.09");
+  const is_liked = boolean("is_liked", false);
 
   return (
     <>
       <MemoryRouter>
         <QuestionCard
           key={Math.floor(Math.random() * 1000) + 1}
-          id={id}
-          hashtags={hashtags}
           author_name={author_name}
-          title={title}
           body={body}
-          bounty={20}
           created_at={created_at}
-          edited_at={edited_at}
-          author={Math.floor(Math.random() * 1000) + 1}
+          hashtags={hashtags}
+          id={id}
+          is_liked={is_liked}
+          like_id={1}
+          title={title}
         />
       </MemoryRouter>
     </>

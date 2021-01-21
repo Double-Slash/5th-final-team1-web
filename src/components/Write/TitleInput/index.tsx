@@ -2,7 +2,7 @@ import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { changeMarkDownTitle } from "@store/MarkDown/action";
 import { addToTag, removeToTag } from "@store/Write/action";
-import Button from "@common/Atoms/Button";
+import HashTag from "@common/Atoms/HashTag";
 import Textarea from "@common/Atoms/Textarea";
 import * as S from "./style";
 
@@ -52,20 +52,18 @@ const TitleInput = () => {
     <>
       <S.Layout>
         <Textarea onChange={changeTitle} placeholder="제목을 입력하세요" />
-        <input
-          type="text"
-          value={tagValue}
-          onChange={changeTag}
-          onKeyDown={pressEnterKey}
-          placeholder="태그를 입력하세요"
-        />
-        <div className="tag-list">
+        <S.HashTagList className="tag-list">
           {tagList.map((tag) => (
-            <Button key={tag} isLinked={false} onClick={() => clickTag(tag)}>
-              {tag}
-            </Button>
+            <HashTag key={tag} isBasicHashTag onClick={() => clickTag(tag)} text={tag} />
           ))}
-        </div>
+          <input
+            type="text"
+            value={tagValue}
+            onChange={changeTag}
+            onKeyDown={pressEnterKey}
+            placeholder="태그를 입력하세요"
+          />
+        </S.HashTagList>
       </S.Layout>
     </>
   );

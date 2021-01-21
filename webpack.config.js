@@ -54,12 +54,13 @@ module.exports = () => {
         },
         {
           test: /\.(ts|tsx)$/,
-          use: {
-            loader: "ts-loader",
-            options: {
-              transpileOnly: !isEnvDevelopment,
-            },
-          },
+          use: "ts-loader",
+          // use: {
+          //   loader: "ts-loader",
+          //   options: {
+          //     transpileOnly: !isEnvDevelopment,
+          //   },
+          // },
           exclude: path.join(__dirname, "node_modules"),
         },
         // {

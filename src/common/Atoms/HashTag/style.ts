@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 
 export const HashTag = styled.div`
   display: inline-flex;
-  height: 32px;
+  align-items: flex-end;
+  height: 24px;
   padding: 4px 16px;
   border: 1px solid #a3a3a4;
   border-radius: 1em;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 0.75rem;
   color: #266ce6;
   cursor: pointer;
   &::before {
@@ -19,12 +20,13 @@ export const HashTag = styled.div`
 
 export const HashTagLink = styled(Link)`
   display: inline-flex;
-  height: 32px;
+  align-items: flex-end;
+  height: 24px;
   padding: 4px 16px;
   border: 1px solid #a3a3a4;
   border-radius: 1em;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 0.75rem;
   color: #266ce6;
   &::before {
     content: "#";

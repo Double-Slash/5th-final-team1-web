@@ -6,4 +6,16 @@ export const PostContent = styled.section`
   h1 {
     font-size: 1.2rem;
   }
+  .post-content {
+    min-height: 400px;
+  }
+  .button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+  .modify-btn {
+    padding: 8px 16px;
+    margin-top: 16px;
+  }
 `;

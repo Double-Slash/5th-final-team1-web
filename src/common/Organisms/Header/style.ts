@@ -21,6 +21,10 @@ export const Header = styled.header`
     span {
       margin-right: 16px;
     }
+    .search {
+      margin-left: 8px;
+      font-size: 0.8rem;
+    }
   }
   ${media.xxlarge} {
     padding: 0 400px;
@@ -30,5 +34,13 @@ export const Header = styled.header`
   }
   ${media.large} {
     padding: 0 20px;
+  }
+`;
+
+export const Logo = styled.div`
+  width: 20%;
+  img {
+    width: 96px;
+    height: 40px;
   }
 `;

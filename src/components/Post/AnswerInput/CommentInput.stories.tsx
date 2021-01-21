@@ -3,23 +3,23 @@ import { Provider } from "react-redux";
 import { Meta, Story } from "@storybook/react/types-6-0";
 import { withKnobs, number } from "@storybook/addon-knobs";
 import store from "@store/index";
-import CommentInput, { CommentInputProps } from "./index";
+import AnswerInput, { AnswerInputProps } from "./index";
 
 export default {
-  title: "post/CommentInput",
-  component: CommentInput,
+  title: "post/AnswerInput",
+  component: AnswerInput,
   decorators: [withKnobs],
 } as Meta;
 
-const CommentInputTemplate: Story<CommentInputProps> = (args) => {
+const AnswerInputTemplate: Story<AnswerInputProps> = (args) => {
   const answer = number("answer", 2);
   return (
     <>
       <Provider store={store()}>
-        <CommentInput {...args} answers={answer} />
+        <AnswerInput {...args} answers={answer} />
       </Provider>
     </>
   );
 };
-export const DefaultCommentInput = CommentInputTemplate.bind({});
-DefaultCommentInput.args = {};
+export const DefaultAnswerInput = AnswerInputTemplate.bind({});
+DefaultAnswerInput.args = {};

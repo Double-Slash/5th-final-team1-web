@@ -1,6 +1,6 @@
 import React from "react";
 import PageHeader from "@components/Questions/PageHeader";
-import TotalQuestions from "@components/Questions/TotalQuestions";
+import TotalQuestionsContainer from "@components/Questions/TotalQuestionsContainer";
 import * as S from "./style";
 
 const Question = () => {
@@ -8,7 +8,7 @@ const Question = () => {
     <>
       <PageHeader />
       <S.Layout>
-        <TotalQuestions />
+        <TotalQuestionsContainer />
       </S.Layout>
     </>
   );
