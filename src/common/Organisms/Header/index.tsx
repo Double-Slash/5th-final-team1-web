@@ -4,7 +4,6 @@ import { useRouteMatch } from "react-router-dom";
 import { BsSearch, BsInboxFill } from "react-icons/bs";
 import Link from "@common/Atoms/Link";
 import LinkGroup from "@common/Molecules/LinkGroup";
-import Button from "@common/Atoms/Button";
 import { getAccessToken } from "@utils/modules/token";
 import Logo from "@static/img/logo.png";
 import * as S from "./style";
@@ -46,9 +45,9 @@ const Header = () => {
                 Log In
               </a>
             )}
-            <Button onClick={() => {}} isLinked>
-              <BsSearch />
-            </Button>
+            <Link to="search">
+              <BsSearch className="search" />
+            </Link>
           </div>
         </S.Header>
       )}

@@ -21,6 +21,10 @@ export const Header = styled.header`
     span {
       margin-right: 16px;
     }
+    .search {
+      margin-left: 8px;
+      font-size: 0.8rem;
+    }
   }
   ${media.xxlarge} {
     padding: 0 400px;
