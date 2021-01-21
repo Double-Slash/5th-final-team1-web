@@ -1,5 +1,6 @@
 function sliceUserName(name: string) {
-  return name.replace(/^\D+_/, "");
+  if (!name) return null;
+  return (name || "").replace(/^\D+_/, "");
 }
 
 export default sliceUserName;
