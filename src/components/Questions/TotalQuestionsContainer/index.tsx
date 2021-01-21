@@ -25,8 +25,8 @@ const TotalQuestionsContainer = () => {
       <S.Layout>
         <h1 className="title">전체</h1>
         <article>
-          {questionData?.map((listData) => (
-            <TotalQuestionList key={Math.random() * 10} listData={listData} />
+          {questionData?.map((listData, index) => (
+            <TotalQuestionList key={index.toString()} listData={listData} />
           ))}
         </article>
         <div ref={loadingRef} />

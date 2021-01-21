@@ -9,14 +9,14 @@ export interface TotalProjectListProps {
 }
 
 const TotalProjectList = ({ listData }: TotalProjectListProps) => {
-  const [isLoad, skeletonRef] = useSkeleton({ threshold: 0 });
+  const [isLoad, skeletonRef] = useSkeleton<HTMLUListElement>({ threshold: 0 });
 
   return (
     <>
       <S.Layout ref={skeletonRef}>
         {isLoad ? (
           listData.map((item) => {
-            const { author_name, created_at, crew_field, hashtags, id, title } = item;
+            const { author_name, created_at, crew_field, hashtags, id, is_liked, like_id, title } = item;
             return (
               <ProjectCard
                 key={id}
@@ -25,6 +25,8 @@ const TotalProjectList = ({ listData }: TotalProjectListProps) => {
                 crew_field={crew_field}
                 hashtags={hashtags}
                 id={id}
+                is_liked={is_liked}
+                like_id={like_id}
                 title={title}
               />
             );

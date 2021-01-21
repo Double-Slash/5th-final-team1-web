@@ -30,8 +30,8 @@ const TotalProjectsContainer = () => {
       <S.Layout>
         <h1 className="list-title">전체</h1>
         <article>
-          {reulstData?.map((listData) => (
-            <TotalProjectList key={Math.random() * 10} listData={listData} />
+          {reulstData?.map((listData, index) => (
+            <TotalProjectList key={index.toString()} listData={listData} />
           ))}
         </article>
         <div ref={loadingRef} />

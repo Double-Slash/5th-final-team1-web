@@ -9,14 +9,14 @@ export interface TotalQuestionListProps {
 }
 
 const TotalQuestionList = ({ listData }: TotalQuestionListProps) => {
-  const [isLoad, skeletonRef] = useSkeleton({ threshold: 0 });
+  const [isLoad, skeletonRef] = useSkeleton<HTMLUListElement>({ threshold: 0 });
 
   return (
     <>
       <S.Layout ref={skeletonRef}>
         {isLoad ? (
           listData.map((item) => {
-            const { author_name, body, created_at, hashtags, id, title } = item;
+            const { author_name, body, created_at, hashtags, id, is_liked, like_id, title } = item;
             return (
               <QuestionCard
                 key={id}
@@ -25,6 +25,8 @@ const TotalQuestionList = ({ listData }: TotalQuestionListProps) => {
                 created_at={created_at}
                 hashtags={hashtags}
                 id={id}
+                is_liked={is_liked}
+                like_id={like_id}
                 title={title}
               />
             );
