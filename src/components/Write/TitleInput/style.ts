@@ -13,12 +13,14 @@ export const Layout = styled.header`
     margin-bottom: 8px;
     border-bottom: 1px solid gray;
   }
+`;
+
+export const HashTagList = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  padding: 8px 0;
+  border-bottom: 1px solid gray;
   input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 8px;
-    border: none;
-    border-bottom: 1px solid gray;
-    outline: none;
+    margin-left: 8px;
   }
 `;
