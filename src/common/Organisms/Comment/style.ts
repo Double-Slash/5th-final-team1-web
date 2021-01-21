@@ -54,16 +54,6 @@ export const CommentFooter = styled.div`
   button {
     padding: 0;
   }
-  .like-buttons {
-    display: flex;
-    .like,
-    .dislike {
-      width: 48px;
-      svg {
-        margin-right: 4px;
-      }
-    }
-  }
   .comment-toggle {
     margin-left: 40px;
     font-weight: bold;

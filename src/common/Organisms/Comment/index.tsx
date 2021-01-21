@@ -1,30 +1,24 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { BsArrowReturnRight } from "react-icons/bs";
-import { AiFillLike } from "react-icons/ai";
 import ProfileImage from "@common/Atoms/ProfileImage";
 import UserName from "@common/Atoms/UserName";
+import UpDown from "@common/Molecules/UpDown";
 import MarkDownRendering from "@common/Organisms/MarkDownRendering";
 import * as S from "./style";
 
 export interface CommentProps {
   answer: number;
-  author: number;
   author_name: string;
-  num_likes: number;
   body: string;
   created_at: string;
   edited_at: string;
   id: number;
-  question: number;
+  is_liked: "None" | boolean;
+  like_id: "None" | number;
+  num_likes: [number, number];
 }
 
-const Comment = ({ author, author_name, body, num_likes }: CommentProps) => {
-  // 좋아요 버튼 클릭
-  const clickLikeButton = useCallback(() => {}, []);
-
-  // 싫어요 버튼 클릭
-  // const clickDislikeButton = useCallback(() => {}, []);
-
+const Comment = ({ author_name, body, id, is_liked, like_id, num_likes }: CommentProps) => {
   return (
     <>
       <S.Layout>
@@ -40,14 +34,7 @@ const Comment = ({ author, author_name, body, num_likes }: CommentProps) => {
             </S.CommentBody>
             <S.CommentFooter>
               <div className="like-buttons">
-                <div className="like">
-                  <AiFillLike onClick={clickLikeButton} />
-                  <span>{num_likes}</span>
-                </div>
-                {/* <div className="dislike">
-                  <AiFillDislike onClick={clickDislikeButton} />
-                  <span>3</span>
-                </div> */}
+                <UpDown commentId={id} is_liked={is_liked} like_id={like_id} num_likes={num_likes} />
               </div>
             </S.CommentFooter>
           </div>
