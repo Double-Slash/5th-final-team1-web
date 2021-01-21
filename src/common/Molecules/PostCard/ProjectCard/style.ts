@@ -1,19 +1,25 @@
 import styled from "styled-components";
 
 export const Layout = styled.li`
+  a {
+    color: black;
+  }
   .container {
     padding: 24px 16px;
     background: white;
     .title-wrapper {
+      display: flex;
+      align-items: center;
+      .login-check {
+        margin-left: auto;
+        font-size: 20px;
+      }
       h1 {
         font-size: 1.4rem;
       }
-      h2 {
-        margin-bottom: 8px;
-      }
-      a {
-        color: black;
-      }
+    }
+    h2 {
+      margin-bottom: 8px;
     }
     .hash-tag-group {
       margin-bottom: 8px;
@@ -22,6 +28,7 @@ export const Layout = styled.li`
         align-items: center;
         height: 24px;
         margin-right: 8px;
+        color: #266ce6;
       }
     }
   }

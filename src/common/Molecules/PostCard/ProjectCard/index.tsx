@@ -1,4 +1,5 @@
 import React from "react";
+import LikeButton from "@common/Atoms/LikeButton";
 import Link from "@common/Atoms/Link";
 import ProfileImage from "@common/Atoms/ProfileImage";
 import UserName from "@common/Atoms/UserName";
@@ -12,10 +13,21 @@ export interface ProjectCardProps {
   crew_field: string;
   hashtags: string[];
   id: number;
+  is_liked: boolean;
+  like_id: number;
   title: string;
 }
 
-const ProjectCard = ({ author_name, created_at, crew_field, hashtags, id, title }: ProjectCardProps) => {
+const ProjectCard = ({
+  author_name,
+  created_at,
+  crew_field,
+  hashtags,
+  id,
+  is_liked,
+  like_id,
+  title,
+}: ProjectCardProps) => {
   return (
     <>
       <S.Layout>
@@ -24,10 +36,11 @@ const ProjectCard = ({ author_name, created_at, crew_field, hashtags, id, title 
             <Link to={`project/${id}`}>
               <h1>{title}</h1>
             </Link>
-            <Link to={`project/${id}`}>
-              <h2>{crew_field}</h2>
-            </Link>
+            <LikeButton is_liked={is_liked} like_id={like_id} jobposting={id} />
           </div>
+          <Link to={`project/${id}`}>
+            <h2>{crew_field}</h2>
+          </Link>
           <HashTagGroup className="hash-tag-group" namingList={hashtags} />
           <S.CardFooter>
             <div className="user-wrapper">
