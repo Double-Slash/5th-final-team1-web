@@ -21,9 +21,9 @@ function UseInfiniteScroll<T>({ api, loadingRef, listName, limit = 10, threshold
       if (entry.isIntersecting && hasMore) {
         observer.unobserve(entry.target);
         const { data } = await api(lastId.current, limit);
-        lastId.current = data[listName].length;
+        lastId.current += data[listName].length;
         setResult(data);
-        if (lastId.current < limit) {
+        if (lastId.current % limit) {
           observer.unobserve(entry.target);
           setHasMore(false);
         } else {
