@@ -35,17 +35,17 @@ const UpDown = ({ answerId, className = "", commentId, is_liked, like_id, num_li
         setRenewNumLiked(([like, dislike]) => (upDown === "up" ? [like + 1, dislike] : [like, dislike + 1]));
       } else if (status === true) {
         if (upDown === "up") {
-          deleteLike({ like_id: renewLikeId as number });
+          await deleteLike({ like_id: renewLikeId as number });
         } else {
-          patchUpDown({ like_id: renewLikeId as number, updown, ...id });
+          await patchUpDown({ like_id: renewLikeId as number, updown, ...id });
         }
         setRenewIsLiked(upDown === "up" ? "None" : false);
         setRenewNumLiked(([like, dislike]) => (upDown === "up" ? [like - 1, dislike] : [like - 1, dislike + 1]));
       } else {
         if (upDown === "down") {
-          deleteLike({ like_id: renewLikeId as number });
+          await deleteLike({ like_id: renewLikeId as number });
         } else {
-          patchUpDown({ like_id: renewLikeId as number, updown, ...id });
+          await patchUpDown({ like_id: renewLikeId as number, updown, ...id });
         }
         setRenewIsLiked(upDown === "down" ? "None" : true);
         setRenewNumLiked(([like, dislike]) => (upDown === "down" ? [like, dislike - 1] : [like + 1, dislike - 1]));
