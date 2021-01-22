@@ -1,6 +1,7 @@
 import visit from "unist-util-visit";
 import Prism from "prismjs";
 import "prismjs/components/prism-javascript";
+import "prismjs/components/prism-python";
 
 export default function attacher({ include, exclude } = {}) {
   function visitor(node) {
