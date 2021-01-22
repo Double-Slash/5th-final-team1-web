@@ -92,3 +92,36 @@ export interface IProjectDetailList {
   overall_count: number;
   jobpostings: IProjectDetail[];
 }
+
+// 질문글 검색 결과
+export interface IQuestionSearch {
+  author: number;
+  author_name: string | null;
+  body: string;
+  bounty: number;
+  created_at: string;
+  edited_at: string;
+  hashtags: string[];
+  id: number;
+  is_liked: "None" | boolean;
+  like_id: "None" | number;
+  title: string;
+}
+
+// 프로젝트 검색 결과
+export interface IProjectSearch {
+  author: number;
+  author_name: null;
+  body: string;
+  created_at: string;
+  crew_condition: string;
+  crew_count: string;
+  crew_field: string;
+  crew_recruit: string;
+  edited_at: string;
+  hashtags: string[];
+  id: number;
+  is_liked: "None" | boolean;
+  like_id: "None" | number;
+  title: string;
+}

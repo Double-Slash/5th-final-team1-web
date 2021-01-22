@@ -11,6 +11,8 @@ import "@utils/styles/atom-one-light.css";
 
 require("codemirror/mode/markdown/markdown");
 require("codemirror/mode/javascript/javascript");
+require("codemirror/mode/python/python");
+require("codemirror/mode/django/django");
 require("codemirror/mode/jsx/jsx");
 
 interface MarkDownInputProps {
