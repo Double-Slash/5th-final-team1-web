@@ -1,12 +1,14 @@
 import React, { useCallback } from "react";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { rootState } from "@store/index";
+import { useDispatch, useSelector } from "react-redux";
+import { rootState, reduxClear } from "@store/index";
 import Button from "@common/Atoms/Button";
 import { postQuestion } from "@apis/write";
+
 import * as S from "./style";
 
 const EditorFooter = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const title = useSelector((state: rootState) => state.markdown.title);
   const body = useSelector((state: rootState) => state.markdown.markDownText);
@@ -18,9 +20,10 @@ const EditorFooter = () => {
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       const result = await postQuestion({ title, body, bounty, hashtags });
+      dispatch(reduxClear());
       history.replace(`/post/${result.data.id}`);
     },
-    [body, bounty, hashtags, history, title],
+    [body, bounty, dispatch, hashtags, history, title],
   );
 
   return (
