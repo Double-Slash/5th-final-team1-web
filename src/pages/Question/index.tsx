@@ -1,16 +1,16 @@
 import React, { useLayoutEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import AnswerInput from "@components/Post/AnswerInput";
-import AnswerList from "@components/Post/AnswerList";
-import PostContent from "@components/Post/PostContent";
-import PostTitle from "@components/Post/PostTitle";
+import AnswerInput from "@components/Question/AnswerInput";
+import AnswerList from "@components/Question/AnswerList";
+import PostContent from "@components/Question/PostContent";
+import PostTitle from "@components/Question/PostTitle";
 import { getQuestion } from "@apis/question";
 import useSkeleton from "@hooks/useSkeleton";
 import { IQuestion } from "@typings/db";
 import { questionInitialState } from "@typings/dbState";
 import * as S from "./style";
 
-const Post = () => {
+const Question = () => {
   const [resultData, setResultData] = useState<IQuestion>(questionInitialState);
   const { id } = useParams<{ id: string }>();
   const [isLoading, skeletonRef] = useSkeleton<HTMLElement>({});
@@ -22,7 +22,6 @@ const Post = () => {
     };
     callback();
   }, [id]);
-  console.log(resultData);
 
   return (
     <>
@@ -70,4 +69,4 @@ const Post = () => {
   );
 };
 
-export default Post;
+export default Question;

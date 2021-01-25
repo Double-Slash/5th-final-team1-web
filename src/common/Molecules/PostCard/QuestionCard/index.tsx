@@ -32,12 +32,12 @@ const QuestionCard = ({ author_name, body, created_at, hashtags, id, is_liked, l
               <LikeButton is_liked={is_liked} like_id={like_id} question={id} />
             </div>
             <div className="card-header">
-              <Link to={`post/${id}`}>
+              <Link to={`qna/${id}`}>
                 <h1>{title.length <= 20 ? title : `${title.substring(0, 20).trim()}...`}</h1>
               </Link>
               <span>{calcDate({ date: created_at })}</span>
             </div>
-            <Link to={`post/${id}`}>
+            <Link to={`qna/${id}`}>
               <p>{markDownText.length <= 50 ? markDownText : `${markDownText.substring(0, 50).trim()}...`}</p>
             </Link>
           </S.LeftWrapper>
