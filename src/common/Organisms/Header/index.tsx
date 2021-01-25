@@ -3,19 +3,32 @@ import React, { useLayoutEffect, useState } from "react";
 import { useRouteMatch } from "react-router-dom";
 import { BsSearch, BsInboxFill } from "react-icons/bs";
 import Link from "@common/Atoms/Link";
+import UserName from "@common/Atoms/UserName";
 import LinkGroup from "@common/Molecules/LinkGroup";
 import { getAccessToken } from "@utils/modules/token";
 import Logo from "@static/img/logo.png";
+import jwt_decode from "jwt-decode";
 import * as S from "./style";
+
+interface DecodeState {
+  exp: number;
+  jti: string;
+  oauth_username: string;
+  token_type: string;
+  user_id: number;
+}
 
 const Header = () => {
   const match = useRouteMatch("/write");
-  const [isToken, setIsToken] = useState("");
+  const [isToken, setIsToken] = useState<DecodeState>();
   const linkNamingList = ["QnA", "Tags", "Project", "Level"];
   const result = getAccessToken({ key: "access" });
 
   useLayoutEffect(() => {
-    setIsToken(result || "");
+    if (result) {
+      const token = jwt_decode<DecodeState>(result);
+      setIsToken(token);
+    }
   }, [result]);
 
   return (
@@ -33,7 +46,7 @@ const Header = () => {
           <div className="right-buttons">
             {isToken ? (
               <>
-                <span>차민철님</span>
+                <UserName username={isToken.oauth_username} />
                 <BsInboxFill />
               </>
             ) : (
