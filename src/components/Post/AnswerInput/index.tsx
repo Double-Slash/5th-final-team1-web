@@ -39,7 +39,7 @@ const AnswerInput = ({ answers, author, questionId, appendAnswerList }: AnswerIn
         like_id: "None",
         num_likes: [0, 0],
       };
-      appendAnswerList((prev: IQuestion) => {
+      appendAnswerList((prev) => {
         return produce(prev, (draft) => {
           draft.answers.push(recreated);
         });

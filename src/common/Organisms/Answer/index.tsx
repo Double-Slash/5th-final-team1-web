@@ -32,7 +32,8 @@ const Answer = ({ author, author_name, created_at, body, id, is_liked, like_id, 
   const [toggleInput, setToggleInput] = useState(false); // 댓글 입력창 토글
   const [toggleComment, setToggleComment] = useState(false); // 대댓글 리스트 토글
   const [commentText, setCommentText] = useState(""); // 답변 텍스트
-  const copyComments = useMemo(() => comments, [comments]);
+  // const copyComments = useMemo(() => comments, [comments]);
+  const [copyComments, setComments] = useState(comments);
   const { oauth_username } = useDecodeToken();
 
   // 댓글 텍스트 클릭
@@ -57,13 +58,25 @@ const Answer = ({ author, author_name, created_at, body, id, is_liked, like_id, 
       if (commentText.trim().length === 0) return;
       try {
         const { data } = await postComment({ body: commentText, answer: id });
-        copyComments.push({ ...data, ...{ is_liked: "None", like_id: "None", num_likes: [0, 0] } });
+        const recreated: IComment = {
+          answer: data.answer,
+          author: data.author,
+          author_name: data.author_name,
+          body: data.body,
+          created_at: data.created_at,
+          edited_at: data.edited_at,
+          id: data.id,
+          is_liked: "None",
+          like_id: "None",
+          num_likes: [0, 0],
+        };
+        setComments((prev) => [...prev, recreated]);
         changeCommentTextArea("");
       } catch (error) {
         throw new Error(error);
       }
     },
-    [changeCommentTextArea, commentText, copyComments, id],
+    [changeCommentTextArea, commentText, id],
   );
 
   return (
@@ -99,9 +112,9 @@ const Answer = ({ author, author_name, created_at, body, id, is_liked, like_id, 
               >
                 댓글
               </Button>
-              {comments?.length ? (
+              {copyComments?.length ? (
                 <Button isLinked={false} onClick={clickRecommentList} fontColor="gray" className="read-more-comments">
-                  {comments?.length}개의 댓글 {toggleComment ? "보기" : "숨기기"}
+                  {copyComments?.length}개의 댓글 {toggleComment ? "보기" : "숨기기"}
                   {toggleComment ? <AiOutlineDown /> : <AiOutlineUp />}
                 </Button>
               ) : (
