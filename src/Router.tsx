@@ -11,7 +11,7 @@ const Post = loadable(() => import("@pages/Post"));
 const Project = loadable(() => import("@pages/Project"));
 const Projects = loadable(() => import("@pages/Projects"));
 const Search = loadable(() => import("@pages/Search"));
-const Write = loadable(() => import("@pages/Write"));
+const WriteQuestion = loadable(() => import("@pages/WriteQuestion"));
 const WriteProject = loadable(() => import("@pages/WriteProject"));
 
 const Router = () => {
@@ -26,7 +26,7 @@ const Router = () => {
           <Route path="/project/:id" component={Project} exact />
           <Route path="/project" component={Projects} exact />
           <Route path="/search" component={Search} exact />
-          <Route path="/write" component={Write} exact />
+          <Route path="/write/question" component={WriteQuestion} exact />
           <Route path="/write/project" component={WriteProject} exact />
           <Route path="/callback" component={Callback} exact />
         </Switch>

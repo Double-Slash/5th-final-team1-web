@@ -1,13 +1,13 @@
 import React from "react";
-import BountyDragBar from "@components/Write/BountyDragBar";
-import EditorFooter from "@components/Write/EditorFooter";
-import EditorPreview from "@components/Write/EditorPreview";
-import TitleInput from "@components/Write/TitleInput";
+import BountyDragBar from "@components/WriteQuestion/BountyDragBar";
+import EditorFooter from "@components/WriteQuestion/EditorFooter";
+import EditorPreview from "@components/WriteQuestion/EditorPreview";
+import TitleInput from "@components/WriteQuestion/TitleInput";
 import MarkDownInput from "@common/Organisms/MarkDownInput";
 import MarkDownToolBar from "@common/Organisms/MarkDownToolBar";
 import * as S from "./style";
 
-const Write = () => {
+const WriteQuestion = () => {
   return (
     <>
       <S.Layout>
@@ -26,4 +26,4 @@ const Write = () => {
   );
 };
 
-export default Write;
+export default WriteQuestion;
