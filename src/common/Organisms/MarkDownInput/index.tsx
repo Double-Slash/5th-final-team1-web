@@ -17,9 +17,10 @@ require("codemirror/mode/jsx/jsx");
 
 interface MarkDownInputProps {
   className?: string;
+  initialText?: string;
 }
 
-const MarkDownInput = ({ className }: MarkDownInputProps) => {
+const MarkDownInput = ({ className, initialText }: MarkDownInputProps) => {
   const dispatch = useDispatch();
   const markDownText = useSelector<rootState>((state) => state.markdown.markDownText);
   const codeMirrorRef = useRef<EditorFromTextArea | null>(null);
@@ -33,6 +34,7 @@ const MarkDownInput = ({ className }: MarkDownInputProps) => {
       viewportMargin: Infinity,
       lineWrapping: true,
     });
+    codeMirrorRef.current.setValue("test texttttt");
     window.codeMirror = codeMirrorRef.current;
   }, []);
 
@@ -47,8 +49,8 @@ const MarkDownInput = ({ className }: MarkDownInputProps) => {
   // codemirror clear
   useEffect(() => {
     if (markDownText || !codeMirrorRef.current) return;
-    codeMirrorRef.current.setValue("");
-  }, [markDownText]);
+    codeMirrorRef.current.setValue(initialText || "");
+  }, [initialText, markDownText]);
 
   return (
     <>
