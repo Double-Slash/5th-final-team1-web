@@ -2,7 +2,7 @@ import React from "react";
 import MarkDownInput from "@common/Organisms/MarkDownInput";
 import * as S from "./style";
 
-const MarkDownEditor = () => {
+const ProjectMarkDownInput = () => {
   return (
     <>
       <S.Layout>
@@ -12,4 +12,4 @@ const MarkDownEditor = () => {
   );
 };
 
-export default MarkDownEditor;
+export default ProjectMarkDownInput;
