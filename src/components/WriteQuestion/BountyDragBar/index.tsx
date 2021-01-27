@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useCallback, useContext, useEffect, useRef, useState } from "react";
 import debounce from "lodash.debounce";
-import { changeDragBarGauge } from "@store/Write/action";
+import { WriteQuestionContext } from "@store/WriteQuestion";
+import { changeDragBarGauge } from "@store/WriteQuestion/action";
 import * as S from "./style";
 
 const BuountyDragBar = () => {
-  const dispatch = useDispatch();
+  const { dispatch } = useContext(WriteQuestionContext);
   const barRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLDivElement>(null);
   const debounced = useRef(

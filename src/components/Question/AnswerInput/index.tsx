@@ -1,33 +1,34 @@
-import React, { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useCallback, useContext } from "react";
 import produce from "immer";
 import Button from "@common/Atoms/Button";
+import { MarkDownEditorContext } from "@store/MarkDownEditor";
+import { clearContext } from "@store/MarkDownEditor/action";
 import LogInCheck from "@common/Organisms/LogInCheck";
 import MarkDownInput from "@common/Organisms/MarkDownInput";
-import MarkDownRendering from "@common/Organisms/MarkDownRendering";
 import MarkDownToolBar from "@common/Organisms/MarkDownToolBar";
+import MarkDownRendering from "@common/Organisms/MarkDownRendering";
 import { TabList, TabMenu, TabPanel } from "@common/Organisms/TabMenu";
 import { postAnsewrs } from "@apis/answer";
-import { reduxClear, rootState } from "@store/index";
+import useDecodeToken from "@hooks/useDecodeToken";
 import { IAnswer, IQuestion } from "@typings/db";
+import { BASIC_MARKDOWN_TOOLBAR } from "@utils/const";
 import * as S from "./style";
 
 export interface AnswerInputProps {
   answers: number;
-  author: number;
   questionId: number;
   appendAnswerList: React.Dispatch<React.SetStateAction<IQuestion>>;
 }
 
-const AnswerInput = ({ answers, author, questionId, appendAnswerList }: AnswerInputProps) => {
-  const dispatch = useDispatch();
-  const markDownText = useSelector((state: rootState) => state.markdown.markDownText);
+const AnswerInput = ({ answers, questionId, appendAnswerList }: AnswerInputProps) => {
+  const { dispatch, editorText } = useContext(MarkDownEditorContext);
+  const { user_id } = useDecodeToken();
 
   const clickSubmitButton = useCallback(async () => {
     try {
-      const { data } = await postAnsewrs({ body: markDownText, question: questionId });
+      const { data } = await postAnsewrs({ body: editorText, question: questionId });
       const recreated: IAnswer = {
-        author,
+        author: user_id,
         author_name: data.author_name,
         body: data.body,
         comments: [],
@@ -44,11 +45,11 @@ const AnswerInput = ({ answers, author, questionId, appendAnswerList }: AnswerIn
           draft.answers.push(recreated);
         });
       });
-      dispatch(reduxClear());
+      dispatch(clearContext());
     } catch (error) {
-      throw new Error(error);
+      dispatch(clearContext());
     }
-  }, [appendAnswerList, author, dispatch, markDownText, questionId]);
+  }, [appendAnswerList, dispatch, editorText, questionId, user_id]);
 
   return (
     <>
@@ -57,11 +58,11 @@ const AnswerInput = ({ answers, author, questionId, appendAnswerList }: AnswerIn
         <TabMenu>
           <TabList tabButtonList={["답변 작성", "미리 보기"]} />
           <TabPanel index={0} className="answer-input-wrapper">
-            <MarkDownToolBar />
+            <MarkDownToolBar toolBarList={BASIC_MARKDOWN_TOOLBAR} />
             <MarkDownInput className="answer-input" />
           </TabPanel>
           <TabPanel index={1} className="preview">
-            <MarkDownRendering markDownText={markDownText} />
+            <MarkDownRendering editorText={editorText} />
           </TabPanel>
         </TabMenu>
         <LogInCheck onClick={clickSubmitButton}>

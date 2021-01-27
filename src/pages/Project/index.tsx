@@ -3,6 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import ProjectContent from "@components/Project/ProjectContent";
 import ProjectFooter from "@components/Project/ProjectFooter";
 import ProjectHeader from "@components/Project/ProjectHeader";
+import MarkDownEditor from "@store/MarkDownEditor";
 import useSkeleton from "@hooks/useSkeleton";
 import { getProjectDetail } from "@apis/project";
 import { IProjectDetail } from "@typings/db";
@@ -34,21 +35,23 @@ const Project = () => {
       <S.Layout ref={skeletonRef}>
         {isLoading ? (
           <>
-            <ProjectHeader
-              author_name={resultData.author_name}
-              created_at={resultData.created_at}
-              crew_condition={resultData.crew_condition}
-              crew_count={resultData.crew_count}
-              crew_field={resultData.crew_field}
-              crew_recruit={resultData.crew_recruit}
-              hashtags={resultData.hashtags}
-              id={resultData.id}
-              is_liked={resultData.is_liked}
-              like_id={resultData.like_id}
-              title={resultData.title}
-            />
-            <ProjectContent body={resultData.body} />
-            <ProjectFooter />
+            <MarkDownEditor>
+              <ProjectHeader
+                author_name={resultData.author_name}
+                created_at={resultData.created_at}
+                crew_condition={resultData.crew_condition}
+                crew_count={resultData.crew_count}
+                crew_field={resultData.crew_field}
+                crew_recruit={resultData.crew_recruit}
+                hashtags={resultData.hashtags}
+                id={resultData.id}
+                is_liked={resultData.is_liked}
+                like_id={resultData.like_id}
+                title={resultData.title}
+              />
+              <ProjectContent editorText={resultData.body} />
+              <ProjectFooter />
+            </MarkDownEditor>
           </>
         ) : (
           <S.Skeleton>

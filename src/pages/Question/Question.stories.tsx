@@ -1,8 +1,6 @@
 import React from "react";
 import { MemoryRouter } from "react-router-dom";
-import { Provider } from "react-redux";
 import { Meta } from "@storybook/react/types-6-0";
-import store from "@store/index";
 import Question from "./index";
 
 export default {
@@ -13,11 +11,9 @@ export default {
 const QuestionTemplate = () => {
   return (
     <>
-      <Provider store={store()}>
-        <MemoryRouter>
-          <Question />
-        </MemoryRouter>
-      </Provider>
+      <MemoryRouter>
+        <Question />
+      </MemoryRouter>
     </>
   );
 };

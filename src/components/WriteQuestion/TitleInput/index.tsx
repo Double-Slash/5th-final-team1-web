@@ -1,22 +1,24 @@
-import React, { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
-import { changeMarkDownTitle } from "@store/MarkDown/action";
-import { addToTag, removeToTag } from "@store/Write/action";
+import React, { useCallback, useContext, useState } from "react";
 import HashTag from "@common/Atoms/HashTag";
 import Textarea from "@common/Atoms/Textarea";
+import { MarkDownEditorContext } from "@store/MarkDownEditor";
+import { changeTitleAction } from "@store/MarkDownEditor/action";
+import { WriteQuestionContext } from "@store/WriteQuestion";
+import { addToTag, removeToTag } from "@store/WriteQuestion/action";
 import * as S from "./style";
 
 const TitleInput = () => {
-  const dispatch = useDispatch();
+  const { dispatch: titleDispatch } = useContext(MarkDownEditorContext);
+  const { dispatch: hashTagDispatch } = useContext(WriteQuestionContext);
   const [tagList, setTagList] = useState<string[]>([]);
   const [tagValue, setTagValue] = useState("");
 
   // 제목 변경
   const changeTitle = useCallback(
     (text: string) => {
-      dispatch(changeMarkDownTitle(text));
+      titleDispatch(changeTitleAction(text));
     },
-    [dispatch],
+    [titleDispatch],
   );
 
   // 태그 text 변경
@@ -32,10 +34,10 @@ const TitleInput = () => {
         if (!trim) return;
         setTagList((prev) => [...prev, trim]);
         setTagValue("");
-        dispatch(addToTag(trim));
+        hashTagDispatch(addToTag(trim));
       }
     },
-    [dispatch, tagValue],
+    [hashTagDispatch, tagValue],
   );
 
   // 태그 클릭 시 해당 태그 삭제
@@ -43,9 +45,9 @@ const TitleInput = () => {
     (clicked: string) => {
       const tagIndex = tagList.findIndex((value) => value === clicked);
       setTagList((prev) => [...prev.slice(0, tagIndex), ...prev.slice(tagIndex + 1, tagList.length)]);
-      dispatch(removeToTag(tagIndex));
+      hashTagDispatch(removeToTag(tagIndex));
     },
-    [dispatch, tagList],
+    [hashTagDispatch, tagList],
   );
 
   return (

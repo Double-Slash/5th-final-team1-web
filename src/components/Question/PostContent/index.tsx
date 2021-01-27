@@ -1,13 +1,14 @@
-import React, { useCallback, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useCallback, useContext, useState } from "react";
 import Button from "@common/Atoms/Button";
 import MarkDownInput from "@common/Organisms/MarkDownInput";
-import MarkDownRendering from "@common/Organisms/MarkDownRendering";
 import MarkDownToolBar from "@common/Organisms/MarkDownToolBar";
+import MarkDownRendering from "@common/Organisms/MarkDownRendering";
 import { TabList, TabMenu, TabPanel } from "@common/Organisms/TabMenu";
 import useDecodeToken from "@hooks/useDecodeToken";
 import { patchQuestion } from "@apis/question";
-import { rootState, reduxClear } from "@store/index";
+import { MarkDownEditorContext } from "@store/MarkDownEditor";
+import { clearContext } from "@store/MarkDownEditor/action";
+import { BASIC_MARKDOWN_TOOLBAR } from "@utils/const";
 import * as S from "./style";
 
 export interface PostContentProps {
@@ -21,29 +22,28 @@ const PostContent = ({ author_id, body, questionId, title }: PostContentProps) =
   const [toggle, setToggle] = useState(false);
   const [renewBody, setRenewBody] = useState(body);
   const { user_id: token_id } = useDecodeToken();
-  const markDownText = useSelector<rootState>((state) => state.markdown.markDownText);
-  const disptach = useDispatch();
+  const { dispatch, editorText } = useContext(MarkDownEditorContext);
 
   const clickModifyButton = useCallback(async () => {
     try {
       if (toggle) {
-        const { data } = await patchQuestion({ body: markDownText as string, id: questionId, title });
+        const { data } = await patchQuestion({ body: editorText as string, id: questionId, title });
         setRenewBody(data.body);
         setToggle(false);
-        disptach(reduxClear());
       } else {
         setToggle(true);
       }
+      dispatch(clearContext());
     } catch (error) {
       setToggle(false);
-      disptach(reduxClear());
+      dispatch(clearContext());
     }
-  }, [disptach, markDownText, questionId, title, toggle]);
+  }, [dispatch, editorText, questionId, title, toggle]);
 
   const clickCancelButton = useCallback(() => {
     setToggle((prev) => !prev);
-    disptach(reduxClear());
-  }, [disptach]);
+    dispatch(clearContext());
+  }, [dispatch]);
 
   return (
     <>
@@ -52,15 +52,15 @@ const PostContent = ({ author_id, body, questionId, title }: PostContentProps) =
           <TabMenu>
             <TabList tabButtonList={["질문 수정", "미리 보기"]} />
             <TabPanel index={0}>
-              <MarkDownToolBar />
+              <MarkDownToolBar toolBarList={BASIC_MARKDOWN_TOOLBAR} />
               <MarkDownInput className="markdown-input" initialText={renewBody} />
             </TabPanel>
             <TabPanel index={1} className="preview">
-              <MarkDownRendering markDownText={markDownText as string} />
+              <MarkDownRendering editorText={editorText} />
             </TabPanel>
           </TabMenu>
         ) : (
-          <MarkDownRendering className="post-content" markDownText={renewBody} />
+          <MarkDownRendering className="post-content" editorText={renewBody} />
         )}
         {author_id === token_id && (
           <div className="button-wrapper">
@@ -69,7 +69,7 @@ const PostContent = ({ author_id, body, questionId, title }: PostContentProps) =
                 onClick={clickCancelButton}
                 isLinked={false}
                 className="cancel-btn"
-                buttonColor="#266ce6"
+                buttonColor="#a3a3a3"
                 fontColor="white"
               >
                 취소하기
@@ -79,7 +79,7 @@ const PostContent = ({ author_id, body, questionId, title }: PostContentProps) =
               onClick={clickModifyButton}
               isLinked={false}
               className="modify-btn"
-              buttonColor="#a3a3a3"
+              buttonColor={toggle ? "#266ce6" : "#a3a3a3"}
               fontColor="white"
             >
               수정하기

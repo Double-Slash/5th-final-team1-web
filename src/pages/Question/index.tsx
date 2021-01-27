@@ -4,6 +4,7 @@ import AnswerInput from "@components/Question/AnswerInput";
 import AnswerList from "@components/Question/AnswerList";
 import PostContent from "@components/Question/PostContent";
 import PostTitle from "@components/Question/PostTitle";
+import MarkDownEditor from "@store/MarkDownEditor";
 import { getQuestion } from "@apis/question";
 import useSkeleton from "@hooks/useSkeleton";
 import { IQuestion } from "@typings/db";
@@ -14,6 +15,18 @@ const Question = () => {
   const [resultData, setResultData] = useState<IQuestion>(questionInitialState);
   const { id } = useParams<{ id: string }>();
   const [isLoading, skeletonRef] = useSkeleton<HTMLElement>({});
+  const {
+    answers,
+    author,
+    author_name,
+    body,
+    created_at,
+    hashtags,
+    id: questionId,
+    is_liked,
+    like_id,
+    title,
+  } = resultData;
 
   useLayoutEffect(() => {
     const callback = async () => {
@@ -28,23 +41,20 @@ const Question = () => {
       <S.Layout ref={skeletonRef}>
         {isLoading ? (
           <>
-            <PostTitle
-              author_name={resultData.author_name}
-              created_at={resultData.created_at}
-              hashtags={resultData.hashtags}
-              id={resultData.id}
-              is_liked={resultData.is_liked}
-              like_id={resultData.like_id}
-              title={resultData.title}
-            />
-            <PostContent author_id={resultData.author} body={resultData.body} />
-            <AnswerInput
-              answers={resultData.answers.length}
-              author={resultData.author}
-              questionId={resultData.id}
-              appendAnswerList={setResultData}
-            />
-            <AnswerList answers={resultData.answers} />
+            <MarkDownEditor>
+              <PostTitle
+                author_name={author_name}
+                created_at={created_at}
+                hashtags={hashtags}
+                id={questionId}
+                is_liked={is_liked}
+                like_id={like_id}
+                title={title}
+              />
+              <PostContent author_id={author} body={body} questionId={questionId} title={title} />
+              <AnswerInput answers={answers.length} questionId={questionId} appendAnswerList={setResultData} />
+              <AnswerList answers={answers} owner={author} />
+            </MarkDownEditor>
           </>
         ) : (
           <S.Skeleton>
