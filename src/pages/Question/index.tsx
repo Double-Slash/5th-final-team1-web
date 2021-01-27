@@ -53,7 +53,7 @@ const Question = () => {
               />
               <PostContent author_id={author} body={body} questionId={questionId} title={title} />
               <AnswerInput answers={answers.length} questionId={questionId} appendAnswerList={setResultData} />
-              <AnswerList answers={answers} owner={author} />
+              <AnswerList answers={answers} owner={author} question_id={questionId} />
             </MarkDownEditor>
           </>
         ) : (

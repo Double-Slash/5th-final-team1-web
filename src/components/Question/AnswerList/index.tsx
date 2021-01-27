@@ -7,9 +7,10 @@ import * as S from "./style";
 export interface AnswerListProps {
   answers: IAnswer[];
   owner: number;
+  question_id: number;
 }
 
-const AnswerList = ({ answers, owner }: AnswerListProps) => {
+const AnswerList = ({ answers, owner, question_id }: AnswerListProps) => {
   return (
     <>
       <S.Layout>
@@ -22,6 +23,7 @@ const AnswerList = ({ answers, owner }: AnswerListProps) => {
             created_at,
             edited_at,
             id,
+            is_adopted,
             is_liked,
             like_id,
             num_likes,
@@ -37,10 +39,12 @@ const AnswerList = ({ answers, owner }: AnswerListProps) => {
                 created_at={created_at}
                 edited_at={edited_at}
                 id={id}
+                is_adopted={is_adopted}
                 is_liked={is_liked}
                 like_id={like_id}
                 num_likes={num_likes}
                 owner={owner}
+                question_id={question_id}
               />
             </MarkDownEditor>
           );

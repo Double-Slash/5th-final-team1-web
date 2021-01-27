@@ -61,6 +61,13 @@ export const CommentHeader = styled.div`
 export const CommentBody = styled.div`
   margin: 8px 0;
   margin-left: 64px;
+  .modify-input {
+    min-height: 100px;
+    background: white;
+  }
+  .modify-preview {
+    min-height: 100px;
+  }
 `;
 
 export const CommentFooter = styled.div`
