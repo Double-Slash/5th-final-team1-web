@@ -4,12 +4,12 @@ import { getAccessToken } from "@utils/modules/token";
 const { SERVER_URL } = process.env;
 
 const defaultAxios = axios.create({
-  baseURL: `${SERVER_URL}/`,
+  baseURL: SERVER_URL,
 });
 
 const createInstanceWithToken = () => {
   const instance = axios.create({
-    baseURL: `${SERVER_URL}/`,
+    baseURL: SERVER_URL,
   });
   instance.interceptors.request.use((config) => {
     const token = getAccessToken({ key: "access" });

@@ -3,14 +3,14 @@ import MarkDownRendering from "@common/Organisms/MarkDownRendering";
 import * as S from "./style";
 
 export interface ProjectContentProps {
-  body: string;
+  editorText: string;
 }
 
-const ProjectContent = ({ body }: ProjectContentProps) => {
+const ProjectContent = ({ editorText }: ProjectContentProps) => {
   return (
     <>
       <S.Layout>
-        <MarkDownRendering markDownText={body} />
+        <MarkDownRendering editorText={editorText} />
       </S.Layout>
     </>
   );

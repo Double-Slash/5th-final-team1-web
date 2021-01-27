@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { memo, useCallback, useContext, useState } from "react";
 import { BsArrowReturnRight } from "react-icons/bs";
 import { AiOutlineUp, AiOutlineDown } from "react-icons/ai";
 import Button from "@common/Atoms/Button";
@@ -8,9 +8,16 @@ import Textarea from "@common/Atoms/Textarea";
 import UpDown from "@common/Molecules/UpDown";
 import Comment from "@common/Organisms/Comment";
 import LogInCheck from "@common/Organisms/LogInCheck";
+import MarkDownInput from "@common/Organisms/MarkDownInput";
+import MarkDownToolBar from "@common/Organisms/MarkDownToolBar";
 import MarkDownRendering from "@common/Organisms/MarkDownRendering";
+import { MarkDownEditorContext } from "@store/MarkDownEditor";
+import { clearContext } from "@store/MarkDownEditor/action";
+import { TabList, TabMenu, TabPanel } from "@common/Organisms/TabMenu";
 import useDecodeToken from "@hooks/useDecodeToken";
 import calcDate from "@utils/modules/calcDate";
+import { BASIC_MARKDOWN_TOOLBAR } from "@utils/const";
+import { patchAnsewrs } from "@apis/answer";
 import { postComment } from "@apis/comment";
 import { IComment } from "@typings/db";
 import * as S from "./style";
@@ -23,17 +30,36 @@ export interface AnswerProps {
   created_at: string;
   edited_at: string;
   id: number;
+  is_adopted: boolean;
   is_liked: "None" | boolean;
   like_id: "None" | number;
   num_likes: [number, number];
+  owner: number;
+  question_id: number;
 }
 
-const Answer = ({ author, author_name, created_at, body, id, is_liked, like_id, num_likes, comments }: AnswerProps) => {
+const Answer = ({
+  author,
+  author_name,
+  created_at,
+  body,
+  id,
+  is_adopted,
+  is_liked,
+  like_id,
+  num_likes,
+  comments,
+  owner,
+  question_id,
+}: AnswerProps) => {
   const [toggleInput, setToggleInput] = useState(false); // 댓글 입력창 토글
   const [toggleComment, setToggleComment] = useState(false); // 대댓글 리스트 토글
+  const [toggleModify, setToggleModify] = useState(false); // 답변 수정하기 토글
   const [commentText, setCommentText] = useState(""); // 답변 텍스트
-  const copyComments = useMemo(() => comments, [comments]);
-  const { oauth_username } = useDecodeToken();
+  const [copyComments, setComments] = useState(comments);
+  const [renewBody, setRenewBody] = useState(body);
+  const { oauth_username, user_id } = useDecodeToken();
+  const { dispatch, editorText } = useContext(MarkDownEditorContext);
 
   // 댓글 텍스트 클릭
   const clickInputText = useCallback(() => {
@@ -57,14 +83,49 @@ const Answer = ({ author, author_name, created_at, body, id, is_liked, like_id, 
       if (commentText.trim().length === 0) return;
       try {
         const { data } = await postComment({ body: commentText, answer: id });
-        copyComments.push({ ...data, ...{ is_liked: "None", like_id: "None", num_likes: [0, 0] } });
+        const recreated: IComment = {
+          answer: data.answer,
+          author: data.author,
+          author_name: data.author_name,
+          body: data.body,
+          created_at: data.created_at,
+          edited_at: data.edited_at,
+          id: data.id,
+          is_liked: "None",
+          like_id: "None",
+          num_likes: [0, 0],
+        };
+        setComments((prev) => [...prev, recreated]);
         changeCommentTextArea("");
       } catch (error) {
         throw new Error(error);
       }
     },
-    [changeCommentTextArea, commentText, copyComments, id],
+    [changeCommentTextArea, commentText, id],
   );
+
+  // 답변 수정하기 클릭
+  const clickModifyBtn = useCallback(async () => {
+    if (toggleModify) {
+      try {
+        const { data } = await patchAnsewrs({ body: editorText, id, is_adopted, question: question_id });
+        setRenewBody(data.body);
+        setToggleModify(false);
+        dispatch(clearContext());
+      } catch {
+        setToggleModify(false);
+        dispatch(clearContext());
+      }
+    } else {
+      setToggleModify(true);
+    }
+  }, [dispatch, editorText, id, is_adopted, question_id, toggleModify]);
+
+  // 취소하기 버튼 클릭
+  const clickCancelBtn = useCallback(() => {
+    setToggleModify(false);
+    dispatch(clearContext());
+  }, [dispatch]);
 
   return (
     <>
@@ -80,12 +141,57 @@ const Answer = ({ author, author_name, created_at, body, id, is_liked, like_id, 
                 </div>
                 <span>{calcDate({ date: created_at })}</span>
               </div>
-              <Button isLinked={false} onClick={() => {}} className="adopt-btn" buttonColor="#e9e9e9" fontColor="black">
-                채택하기
-              </Button>
+              {author === user_id && (
+                <div className="modify-btn-wrapper">
+                  {toggleModify && (
+                    <Button
+                      isLinked={false}
+                      onClick={clickCancelBtn}
+                      className="cancel-btn"
+                      buttonColor="#a3a3a3"
+                      fontColor="white"
+                    >
+                      취소하기
+                    </Button>
+                  )}
+                  <Button
+                    isLinked={false}
+                    onClick={clickModifyBtn}
+                    className="modify-btn"
+                    buttonColor={toggleModify ? "#266ce6" : "#a3a3a3"}
+                    fontColor="white"
+                  >
+                    수정하기
+                  </Button>
+                </div>
+              )}
+              {owner === user_id && author !== user_id && (
+                <Button
+                  isLinked={false}
+                  onClick={() => {}}
+                  className="adopt-btn"
+                  buttonColor="#e9e9e9"
+                  fontColor="black"
+                >
+                  채택하기
+                </Button>
+              )}
             </S.CommentHeader>
             <S.CommentBody>
-              <MarkDownRendering markDownText={body} />
+              {toggleModify ? (
+                <TabMenu>
+                  <TabList tabButtonList={["질문 수정", "미리 보기"]} />
+                  <TabPanel index={0}>
+                    <MarkDownToolBar toolBarList={BASIC_MARKDOWN_TOOLBAR} />
+                    <MarkDownInput className="modify-input" />
+                  </TabPanel>
+                  <TabPanel index={1}>
+                    <MarkDownRendering className="modify-preview" editorText={editorText} />
+                  </TabPanel>
+                </TabMenu>
+              ) : (
+                <MarkDownRendering editorText={renewBody} />
+              )}
             </S.CommentBody>
             <S.CommentFooter>
               <div className="like-buttons">
@@ -99,9 +205,9 @@ const Answer = ({ author, author_name, created_at, body, id, is_liked, like_id, 
               >
                 댓글
               </Button>
-              {comments?.length ? (
+              {copyComments?.length ? (
                 <Button isLinked={false} onClick={clickRecommentList} fontColor="gray" className="read-more-comments">
-                  {comments?.length}개의 댓글 {toggleComment ? "보기" : "숨기기"}
+                  {copyComments?.length}개의 댓글 {toggleComment ? "보기" : "숨기기"}
                   {toggleComment ? <AiOutlineDown /> : <AiOutlineUp />}
                 </Button>
               ) : (
@@ -149,4 +255,4 @@ const Answer = ({ author, author_name, created_at, body, id, is_liked, like_id, 
   );
 };
 
-export default Answer;
+export default memo(Answer);

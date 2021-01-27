@@ -1,13 +1,13 @@
-import React, { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useCallback, useContext, useState } from "react";
 import Input from "@common/Atoms/Input";
 import HashTag from "@common/Atoms/HashTag";
 import useInput from "@hooks/useInput";
+import { WriteProjectContext } from "@store/WriteProject";
 import { addHashTag, removeHashTag } from "@store/WriteProject/action";
 import * as S from "./style";
 
 const HashTagInput = () => {
-  const dispatch = useDispatch();
+  const { dispatch } = useContext(WriteProjectContext);
   const [hashTagText, changeHashTagText, setHashTagText] = useInput("");
   const [hashTagList, setHashTagList] = useState<string[]>([]);
 

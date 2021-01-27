@@ -96,22 +96,22 @@ export interface IProjectDetailList {
 // 질문글 검색 결과
 export interface IQuestionSearch {
   author: number;
-  author_name: string | null;
+  author_name: string;
   body: string;
   bounty: number;
   created_at: string;
   edited_at: string;
   hashtags: string[];
   id: number;
-  is_liked: "None" | boolean;
-  like_id: "None" | number;
+  is_liked: boolean;
+  like_id: number;
   title: string;
 }
 
 // 프로젝트 검색 결과
 export interface IProjectSearch {
   author: number;
-  author_name: null;
+  author_name: string;
   body: string;
   created_at: string;
   crew_condition: string;
@@ -121,7 +121,7 @@ export interface IProjectSearch {
   edited_at: string;
   hashtags: string[];
   id: number;
-  is_liked: "None" | boolean;
-  like_id: "None" | number;
+  is_liked: boolean;
+  like_id: number;
   title: string;
 }

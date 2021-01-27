@@ -1,12 +1,12 @@
-import React, { useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import React, { useContext, useEffect, useRef } from "react";
 import Input from "@common/Atoms/Input";
 import useInput from "@hooks/useInput";
+import { WriteProjectContext } from "@store/WriteProject";
 import { changeCondition, changeDate, changeField, changeHeadcount } from "@store/WriteProject/action";
 import * as S from "./style";
 
 const WriteProject = () => {
-  const dispatch = useDispatch();
+  const { dispatch } = useContext(WriteProjectContext);
   const [condition, setCondition] = useInput("");
   const [date, setDate] = useInput("");
   const [field, setField] = useInput("");

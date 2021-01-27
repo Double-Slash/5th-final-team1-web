@@ -1,16 +1,16 @@
-import React, { useCallback } from "react";
-import { useDispatch } from "react-redux";
-import { changeMarkDownTitle } from "@store/MarkDown/action";
+import React, { useCallback, useContext } from "react";
 import Textarea from "@common/Atoms/Textarea";
+import { MarkDownEditorContext } from "@store/MarkDownEditor";
+import { changeTitleAction } from "@store/MarkDownEditor/action";
 import * as S from "./style";
 
 const TitleInput = () => {
-  const dispatch = useDispatch();
+  const { dispatch } = useContext(MarkDownEditorContext);
 
   // 제목 변경
   const changeTitle = useCallback(
     (text: string) => {
-      dispatch(changeMarkDownTitle(text));
+      dispatch(changeTitleAction(text));
     },
     [dispatch],
   );

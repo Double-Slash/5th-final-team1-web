@@ -16,7 +16,7 @@ const PageHeader = () => {
           </h1>
           <div className="wrapper">
             <QnaHeaderSvg />
-            {getAccessToken({ key: "access" }) && <Link to="write">질문하기</Link>}
+            {getAccessToken({ key: "access" }) && <Link to="write/question">질문하기</Link>}
           </div>
         </S.Wrapper>
       </S.Layout>

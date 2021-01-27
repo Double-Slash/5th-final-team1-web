@@ -3,16 +3,15 @@ import remark from "remark";
 import breaks from "remark-breaks";
 import htmlPlugin from "remark-html";
 import reactParser from "html-react-parser";
-
 import prismPlugin from "@utils/modules/prism-plugin";
 import * as S from "./style";
 
 interface MarkDownRenderingProps {
-  markDownText: string;
   className?: string;
+  editorText: string;
 }
 
-const MarkDownRendering = ({ className, markDownText }: MarkDownRenderingProps) => {
+const MarkDownRendering = ({ className, editorText }: MarkDownRenderingProps) => {
   const [html, setHtml] = useState("");
 
   useEffect(() => {
@@ -20,11 +19,11 @@ const MarkDownRendering = ({ className, markDownText }: MarkDownRenderingProps) 
       .use(prismPlugin)
       .use(breaks)
       .use(htmlPlugin)
-      .process(markDownText, (_, file) => {
+      .process(editorText, (_, file) => {
         const textResult = String(file);
         setHtml(textResult);
       });
-  }, [markDownText]);
+  }, [editorText]);
 
   return (
     <>

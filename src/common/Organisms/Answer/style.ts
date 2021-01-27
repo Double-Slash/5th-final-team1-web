@@ -40,16 +40,34 @@ export const CommentHeader = styled.div`
     font-weight: bold;
     font-size: 1.2rem;
   }
-  .adopt-btn {
+  .modify-btn-wrapper {
+    display: flex;
+    margin-left: auto;
+  }
+  .adopt-btn,
+  .modify-btn,
+  .cancel-btn {
     margin-left: auto;
     padding: 8px 24px;
     height: fit-content;
+    font-weight: bold;
+  }
+  .modify-btn {
+    color: white;
+    margin-left: 8px;
   }
 `;
 
 export const CommentBody = styled.div`
   margin: 8px 0;
   margin-left: 64px;
+  .modify-input {
+    min-height: 100px;
+    background: white;
+  }
+  .modify-preview {
+    min-height: 100px;
+  }
 `;
 
 export const CommentFooter = styled.div`

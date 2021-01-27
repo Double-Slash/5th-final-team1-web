@@ -5,18 +5,13 @@ import {
   BsTypeBold,
   BsTypeItalic,
   BsTypeStrikethrough,
+  BsCardImage,
   BsChevronRight,
   BsLink45Deg,
 } from "react-icons/bs";
 import { BiCodeAlt } from "react-icons/bi";
-import { IconType } from "react-icons/lib";
 
-interface dataType {
-  icon: IconType;
-  type: string;
-}
-
-const data: dataType[] = [
+const data = [
   {
     icon: BsTypeH1,
     type: "h1",
@@ -52,6 +47,10 @@ const data: dataType[] = [
   {
     icon: BiCodeAlt,
     type: "blockquote",
+  },
+  {
+    icon: BsCardImage,
+    type: "image",
   },
 ];
 

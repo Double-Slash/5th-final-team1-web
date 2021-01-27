@@ -1,8 +1,6 @@
 import React from "react";
-import { Provider } from "react-redux";
 import { Meta } from "@storybook/react/types-6-0";
 import { withKnobs } from "@storybook/addon-knobs";
-import store from "@store/index";
 import ProjectCondition from "./index";
 
 export default {
@@ -14,9 +12,7 @@ export default {
 const ProjectConditionTemplate = () => {
   return (
     <>
-      <Provider store={store()}>
-        <ProjectCondition />
-      </Provider>
+      <ProjectCondition />
     </>
   );
 };

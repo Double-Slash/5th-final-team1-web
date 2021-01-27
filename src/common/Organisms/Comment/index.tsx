@@ -30,7 +30,7 @@ const Comment = ({ author_name, body, id, is_liked, like_id, num_likes }: Commen
               <UserName username={author_name} className="user-name" />
             </S.CommentHeader>
             <S.CommentBody>
-              <MarkDownRendering markDownText={body} />
+              <MarkDownRendering editorText={body} />
             </S.CommentBody>
             <S.CommentFooter>
               <div className="like-buttons">
