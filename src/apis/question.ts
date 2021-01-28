@@ -26,3 +26,8 @@ export const getQuestion = ({ id }: { id: number }) => {
 export const patchQuestion = ({ body, id, title }: IPatchQuestion) => {
   return withTokenAxios.patch(`/questions/viewset/${id}/`, { body, title });
 };
+
+// 답변 채택 POST
+export const postAnswerAdopt = ({ answer_id, id }: { answer_id: number; id: number }) => {
+  return withTokenAxios.post(`/questions/viewset/${id}/adopt/`, { answer: answer_id });
+};
