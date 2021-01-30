@@ -5,4 +5,7 @@ export const Layout = styled.article`
   margin-bottom: 16px;
   border-bottom: 1px solid gray;
   overflow-y: scroll;
+  .markdown-input {
+    overflow-y: initial;
+  }
 `;
