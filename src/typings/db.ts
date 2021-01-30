@@ -53,6 +53,19 @@ export interface IAnswer {
   num_likes: [number, number];
 }
 
+// 답변 list item
+export interface IAnswerListItem {
+  author: number;
+  author_name: string;
+  body: string;
+  created_at: string;
+  edited_at: string;
+  id: number;
+  is_adopted: boolean;
+  is_liked: boolean;
+  question: number;
+}
+
 // 댓글 data
 export interface IComment {
   answer: number;
@@ -78,6 +91,18 @@ export interface IProjectDetail {
   crew_condition: string;
   created_at: string;
   edited_at: string;
+  hashtags: string[];
+  id: number;
+  is_liked: boolean;
+  like_id: number;
+  title: string;
+}
+
+// 프로젝트 리스트 item
+export interface IProjectListItem {
+  author_name: string;
+  created_at: string;
+  crew_field: string;
   hashtags: string[];
   id: number;
   is_liked: boolean;
@@ -124,4 +149,15 @@ export interface IProjectSearch {
   is_liked: boolean;
   like_id: number;
   title: string;
+}
+
+// 유저 정보
+export interface IUserInfo {
+  answer_count: number;
+  comment_count: number;
+  jobposting_count: number;
+  my_answers: IAnswerListItem[];
+  my_projects: IProjectDetail[];
+  my_questions: IQuestionListItem[];
+  question_count: number;
 }
