@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import remark from "remark";
 import breaks from "remark-breaks";
+import gfm from "remark-gfm";
 import htmlPlugin from "remark-html";
 import reactParser from "html-react-parser";
 import prismPlugin from "@utils/modules/prism-plugin";
@@ -12,22 +13,13 @@ interface MarkDownRenderingProps {
 }
 
 const MarkDownRendering = ({ className, editorText }: MarkDownRenderingProps) => {
-  const [html, setHtml] = useState("");
-
-  useEffect(() => {
-    remark()
-      .use(prismPlugin)
-      .use(breaks)
-      .use(htmlPlugin)
-      .process(editorText, (_, file) => {
-        const textResult = String(file);
-        setHtml(textResult);
-      });
-  }, [editorText]);
+  const html_text = remark().use(prismPlugin).use(breaks).use(gfm).use(htmlPlugin).processSync(editorText);
 
   return (
     <>
-      <S.MarkdownWrapper className={`${className || ""} atom-one-dark`}>{reactParser(html)}</S.MarkdownWrapper>
+      <S.MarkdownWrapper className={`${className || ""} atom-one-dark`}>
+        {reactParser(html_text.contents as string)}
+      </S.MarkdownWrapper>
     </>
   );
 };
