@@ -6,7 +6,7 @@ const ProjectMarkDownInput = () => {
   return (
     <>
       <S.Layout>
-        <MarkDownInput />
+        <MarkDownInput className="markdown-input" />
       </S.Layout>
     </>
   );

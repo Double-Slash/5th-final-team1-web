@@ -19,6 +19,7 @@ import calcDate from "@utils/modules/calcDate";
 import { BASIC_MARKDOWN_TOOLBAR } from "@utils/const";
 import { patchAnsewrs } from "@apis/answer";
 import { postComment } from "@apis/comment";
+import { postAnswerAdopt } from "@apis/question";
 import { IComment } from "@typings/db";
 import * as S from "./style";
 
@@ -56,7 +57,8 @@ const Answer = ({
   const [toggleComment, setToggleComment] = useState(false); // 대댓글 리스트 토글
   const [toggleModify, setToggleModify] = useState(false); // 답변 수정하기 토글
   const [commentText, setCommentText] = useState(""); // 답변 텍스트
-  const [copyComments, setComments] = useState(comments);
+  const [adoptBtnDisabled, setAdoptBtnDisabled] = useState(is_adopted);
+  const [copyComments, setComments] = useState(comments); // 댓글 data 복사
   const [renewBody, setRenewBody] = useState(body);
   const { oauth_username, user_id } = useDecodeToken();
   const { dispatch, editorText } = useContext(MarkDownEditorContext);
@@ -127,6 +129,16 @@ const Answer = ({
     dispatch(clearContext());
   }, [dispatch]);
 
+  // 채택하기 버튼 클릭
+  const clickAdoptButton = useCallback(async () => {
+    setAdoptBtnDisabled(true);
+    try {
+      await postAnswerAdopt({ answer_id: id, id: question_id });
+    } catch {
+      setAdoptBtnDisabled(false);
+    }
+  }, [id, question_id]);
+
   return (
     <>
       <S.Layout>
@@ -167,11 +179,12 @@ const Answer = ({
               )}
               {owner === user_id && author !== user_id && (
                 <Button
-                  isLinked={false}
-                  onClick={() => {}}
-                  className="adopt-btn"
                   buttonColor="#e9e9e9"
+                  className="adopt-btn"
+                  disabled={adoptBtnDisabled}
                   fontColor="black"
+                  isLinked={false}
+                  onClick={clickAdoptButton}
                 >
                   채택하기
                 </Button>

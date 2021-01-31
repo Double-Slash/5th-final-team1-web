@@ -21,4 +21,7 @@ export const Button = styled.button<ButtonProps>`
   background: ${(props) => props.buttonColor || "transparent"};
   color: ${(props) => props.fontColor || "white"};
   cursor: pointer;
+  &:disabled {
+    cursor: default;
+  }
 `;

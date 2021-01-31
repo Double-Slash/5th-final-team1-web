@@ -20,7 +20,7 @@ export const TabList = styled.ul<{ buttonCount: number }>`
   }
   li.active {
     font-weight: bold;
-    border-bottom: 1px solid gray;
+    border-bottom: 5px solid #266ce6;
   }
 `;
 
